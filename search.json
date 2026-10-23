@@ -291,7 +291,7 @@
     "href": "session_1/session_1.html#defining-missing-values-1",
     "title": "Session 1: Piping",
     "section": "Defining missing values",
-    "text": "Defining missing values\n\nanother option, mentioned in Homework 6 from A Slower Introduction to R, is to use is.na() and object assignment\nthat strategy can be combined with within() and piping:\n\n\nnhanes &lt;- nhanes |&gt; within({\n  lpta_vigorous &lt;- pad820\n  is.na(lpta_vigorous) &lt;- pad820 == 7777 | pad820 == 9999\n})"
+    "text": "Defining missing values\n\nanother option, mentioned in Homework 6 from A Slower Introduction to R, is to use is.na() and object assignment\nthat strategy can be combined with within() and piping:\n\n\nnhanes &lt;- nhanes |&gt; within({\n  ltpa_vigorous &lt;- pad820\n  is.na(ltpa_vigorous) &lt;- pad820 == 7777 | pad820 == 9999\n})"
   },
   {
     "objectID": "session_1/session_1.html#defining-missing-values-2",
