@@ -962,6 +962,25 @@ Yea-Hung Chen, PhD, MS
 <li><p>Use piping and <code>transform()</code> to define a new variable for weight (<code>bmxwt</code>) in pounds. Hint: <code>bmxwt</code> is in kilograms and there are 2.204623 pounds in 1 kilgoram.</p></li>
 <li><p>Use piping, <code>transform()</code>, and <code>factor()</code> to define a new variable called <code>sex</code>. This should be a labelled version of the original gender variable (<code>riagendr</code>). Values of 1 are used for males and values of 0 are used for females. Not:, this should end up matching the existing <code>gender</code> variable.</p></li>
 </ol>
+</section></section>
+<section>
+<section id="what-now" class="title-slide slide level1 center">
+<h1>What now?</h1>
+
+</section>
+<section id="should-i-always-use-piping" class="slide level2">
+<h2>Should I always use piping?</h2>
+<ul>
+<li><strong>it’s up to you!</strong></li>
+<li>piping can be fun and satisfying</li>
+<li>as we’ll discuss next week, tidyverse purists tend to try to pipe everything</li>
+<li>I would argue, however, that non-piping code can be easy to read</li>
+<li>for example:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>ltpa_vigorous <span class="ot">&lt;-</span> nhanes<span class="sc">$</span>pad820</span>
+<span id="cb50-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(nhanes<span class="sc">$</span>ltpa_vigorous) <span class="ot">&lt;-</span> nhanes<span class="sc">$</span>pad820 <span class="sc">==</span> <span class="dv">7777</span> <span class="sc">|</span> nhanes<span class="sc">$</span>pad820 <span class="sc">==</span> <span class="dv">9999</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 </section></section>

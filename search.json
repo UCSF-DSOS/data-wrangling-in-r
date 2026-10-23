@@ -350,6 +350,13 @@
     "text": "Exercise 5\n\nUse piping and transform() to define a new variable for weight (bmxwt) in pounds. Hint: bmxwt is in kilograms and there are 2.204623 pounds in 1 kilgoram.\nUse piping, transform(), and factor() to define a new variable called sex. This should be a labelled version of the original gender variable (riagendr). Values of 1 are used for males and values of 0 are used for females. Not:, this should end up matching the existing gender variable."
   },
   {
+    "objectID": "session_1/session_1.html#should-i-always-use-piping",
+    "href": "session_1/session_1.html#should-i-always-use-piping",
+    "title": "Session 1: Piping",
+    "section": "Should I always use piping?",
+    "text": "Should I always use piping?\n\nit’s up to you!\npiping can be fun and satisfying\nas we’ll discuss next week, tidyverse purists tend to try to pipe everything\nI would argue, however, that non-piping code can be easy to read\nfor example:\n\n\nnhanes$ltpa_vigorous &lt;- nhanes$pad820\nis.na(nhanes$ltpa_vigorous) &lt;- nhanes$pad820 == 7777 | nhanes$pad820 == 9999"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Data Wrangling in R",
