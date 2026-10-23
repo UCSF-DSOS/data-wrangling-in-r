@@ -284,7 +284,7 @@
     "href": "session_1/session_1.html#defining-missing-values",
     "title": "Session 1: Piping",
     "section": "Defining missing values",
-    "text": "Defining missing values\n\nthe replace() strategy for defining missing values from Session 6 of A Slower Introduction to R can be combined with transform() and piping:\n\n\nnhanes &lt;- nhanes |&gt;\n  transform(ltpa_vigorous = replace(pad820, \n                                    pad820 == 7777 | pad820 == 9999,\n                                    NA))"
+    "text": "Defining missing values\n\nthe replace() strategy for defining missing values from Session 6 of A Slower Introduction to R can be combined with transform() and piping:\n\n\nnhanes &lt;- nhanes |&gt; \n  transform(\n    ltpa_vigorous = replace(pad820, pad820 == 7777 | pad820 == 9999, NA)\n  )"
   },
   {
     "objectID": "session_1/session_1.html#defining-missing-values-1",

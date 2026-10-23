@@ -819,10 +819,10 @@ Yea-Hung Chen, PhD, MS
 <li>the <code>replace()</code> strategy for defining missing values from Session 6 of <a href="https://ucsf-dsos.github.io/a-slower-introduction-to-r/"><em>A Slower Introduction to R</em></a> can be combined with <code>transform()</code> and piping:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">ltpa_vigorous =</span> <span class="fu">replace</span>(pad820, </span>
-<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a>                                    pad820 <span class="sc">==</span> <span class="dv">7777</span> <span class="sc">|</span> pad820 <span class="sc">==</span> <span class="dv">9999</span>,</span>
-<span id="cb39-4"><a aria-hidden="true" tabindex="-1"></a>                                    <span class="cn">NA</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(</span>
+<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ltpa_vigorous =</span> <span class="fu">replace</span>(pad820, pad820 <span class="sc">==</span> <span class="dv">7777</span> <span class="sc">|</span> pad820 <span class="sc">==</span> <span class="dv">9999</span>, <span class="cn">NA</span>)</span>
+<span id="cb39-4"><a aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="defining-missing-values-1" class="slide level2">
