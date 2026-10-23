@@ -151,7 +151,7 @@
     "href": "session_1/session_1.html#setup-for-some-coming-examples-1",
     "title": "Session 1: Piping",
     "section": "Setup for some coming examples",
-    "text": "Setup for some coming examples\n\nlet me first define a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes[1:8, c('ridageyr', 'asthma', 'smoking', 'bmxht')]\n\n\n\nThis code uses bracket notation, which I won’t be covering in this workshop series."
+    "text": "Setup for some coming examples\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes[1:8, c('ridageyr', 'asthma', 'smoking', 'bmxht')]\n\n\n\nThis code uses bracket notation, which I won’t be covering in this workshop series."
   },
   {
     "objectID": "session_1/session_1.html#setup-for-some-coming-examples-2",
@@ -291,7 +291,7 @@
     "href": "session_1/session_1.html#defining-missing-values-1",
     "title": "Session 1: Piping",
     "section": "Defining missing values",
-    "text": "Defining missing values\n\nanother option, mentioned in Homework 6 from A Slower Introduction to R, is to use is.na()\nthat strategy can be combined with within() and piping:\n\n\nnhanes &lt;- nhanes |&gt; within({\n  lpta_vigorous &lt;- pad820\n  is.na(lpta_vigorous) &lt;- pad820 == 7777 | pad820 == 9999\n})"
+    "text": "Defining missing values\n\nanother option, mentioned in Homework 6 from A Slower Introduction to R, is to use is.na() and object assignment\nthat strategy can be combined with within() and piping:\n\n\nnhanes &lt;- nhanes |&gt; within({\n  lpta_vigorous &lt;- pad820\n  is.na(lpta_vigorous) &lt;- pad820 == 7777 | pad820 == 9999\n})"
   },
   {
     "objectID": "session_1/session_1.html#defining-missing-values-2",

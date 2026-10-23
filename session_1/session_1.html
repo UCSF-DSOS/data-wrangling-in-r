@@ -511,7 +511,7 @@ Yea-Hung Chen, PhD, MS
 <section id="setup-for-some-coming-examples-1" class="slide level2">
 <h2>Setup for some coming examples</h2>
 <ul>
-<li>let me first define a mini version of the NHANES data:</li>
+<li>define a mini version of the NHANES data:</li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> nhanes[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="fu">c</span>(<span class="st">'ridageyr'</span>, <span class="st">'asthma'</span>, <span class="st">'smoking'</span>, <span class="st">'bmxht'</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -828,7 +828,7 @@ Yea-Hung Chen, PhD, MS
 <section id="defining-missing-values-1" class="slide level2">
 <h2>Defining missing values</h2>
 <ul>
-<li>another option, mentioned in Homework 6 from <a href="https://ucsf-dsos.github.io/a-slower-introduction-to-r/"><em>A Slower Introduction to R</em></a>, is to use <code>is.na()</code></li>
+<li>another option, mentioned in <a href="https://ucsf-dsos.github.io/a-slower-introduction-to-r/session_6/homework_6.html">Homework 6</a> from <a href="https://ucsf-dsos.github.io/a-slower-introduction-to-r/"><em>A Slower Introduction to R</em></a>, is to use <code>is.na()</code> and object assignment</li>
 <li>that strategy can be combined with <strong><code>within()</code></strong> and piping:</li>
 </ul>
 <div class="cell">
