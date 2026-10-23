@@ -298,7 +298,7 @@
     "href": "session_1/session_1.html#defining-missing-values-1",
     "title": "Session 1: Piping",
     "section": "Defining missing values",
-    "text": "Defining missing values\n\nltpa_vigorous looks like this:\n\n\nnhanes$ltpa_vigorous |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|    1.00   30.00   45.00   60.44   60.00  900.00    4480"
+    "text": "Defining missing values\n\nltpa_vigorous looks like this:\n\n\nnhanes$ltpa_vigorous |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|    1.00   30.00   45.00   60.44   60.00  900.00    4480\n\n\nwhereas pad820 looks like this:\n\n\nnhanes$pad820 |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|    1.00   30.00   45.00   97.57   60.00 9999.00    4466"
   },
   {
     "objectID": "session_1/session_1.html#defining-categorical-variables",
@@ -319,7 +319,7 @@
     "href": "session_1/session_1.html#labeling-categorical-variables-1",
     "title": "Session 1: Piping",
     "section": "Labeling categorical variables",
-    "text": "Labeling categorical variables\n\ncountry looks like this:\n\n\nnhanes$country |&gt; table(useNA='always')\n#| \n#|   USA Other  &lt;NA&gt; \n#|  6519  1617    17"
+    "text": "Labeling categorical variables\n\ncountry looks like this:\n\n\nnhanes$country |&gt; table(useNA='always')\n#| \n#|   USA Other  &lt;NA&gt; \n#|  6519  1617    17\n\n\nwhereas dmdborn4 looks like this:\n\n\nnhanes$dmdborn4 |&gt; table(useNA='always')\n#| \n#|    1    2 &lt;NA&gt; \n#| 6519 1617   17"
   },
   {
     "objectID": "session_1/session_1.html#categorizing-continuous-variables",
@@ -340,7 +340,7 @@
     "href": "session_1/session_1.html#categorizing-continuous-variables-2",
     "title": "Session 1: Piping",
     "section": "Categorizing continuous variables",
-    "text": "Categorizing continuous variables\n\ncholesterol looks like this:\n\n\nnhanes$cholesterol |&gt; table(useNA='always')\n#| \n#|       Desirable Borderline high            High            &lt;NA&gt; \n#|            3695            1397             625            2436"
+    "text": "Categorizing continuous variables\n\ncholesterol looks like this:\n\n\nnhanes$cholesterol |&gt; table(useNA='always')\n#| \n#|       Desirable Borderline high            High            &lt;NA&gt; \n#|            3695            1397             625            2436\n\n\nwhereas lbxtc looks like this:\n\n\nnhanes$lbxtc |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|      62     157     184     187     213     438    2436"
   },
   {
     "objectID": "session_1/session_1.html#exercise-5-1",
