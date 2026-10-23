@@ -203,13 +203,6 @@
     "text": "subset()’s select with piping\n\nwith piping:\n\n\nminidata |&gt; subset(select = c(asthma, smoking))\n#|              asthma            smoking\n#| 1                No History of smoking\n#| 2                No History of smoking\n#| 3                No                 No\n#| 4                No                 No\n#| 5 History of asthma                 No\n#| 6                No History of smoking\n#| 7                No                 No\n#| 8                No History of smoking"
   },
   {
-    "objectID": "session_1/session_1.html#exercise-3-1",
-    "href": "session_1/session_1.html#exercise-3-1",
-    "title": "Session 1: Piping",
-    "section": "Exercise 3",
-    "text": "Exercise 3\n\nUse piping with subset() to select just the ridageyr, country, and smoking variables."
-  },
-  {
     "objectID": "session_1/session_1.html#subsets-select-1",
     "href": "session_1/session_1.html#subsets-select-1",
     "title": "Session 1: Piping",
@@ -245,11 +238,11 @@
     "text": "subset()’s select with piping\n\nminidata now looks like this:\n\n\nminidata |&gt; head()\n#|   bmxht\n#| 1 179.5\n#| 2 174.2\n#| 3 152.9\n#| 4    NA\n#| 5    NA\n#| 6 173.3"
   },
   {
-    "objectID": "session_1/session_1.html#exercise-4-1",
-    "href": "session_1/session_1.html#exercise-4-1",
+    "objectID": "session_1/session_1.html#exercise-3-1",
+    "href": "session_1/session_1.html#exercise-3-1",
     "title": "Session 1: Piping",
-    "section": "Exercise 4",
-    "text": "Exercise 4\n\nUse piping with subset() to obtain a version of the data without the smoking variable. You do not need to replace the original data.\nUse piping with subset() to obtain a version of the data without the country and smoking variables. You do not need to replace the original data."
+    "section": "Exercise 3",
+    "text": "Exercise 3\n\nUse piping with subset() to select just the ridageyr, country, and smoking variables.\nUse piping with subset() to obtain a version of the data without the smoking variable. You do not need to replace the original data.\nUse piping with subset() to obtain a version of the data without the country and smoking variables. You do not need to replace the original data."
   },
   {
     "objectID": "session_1/session_1.html#object-assignment",
@@ -291,11 +284,18 @@
     "href": "session_1/session_1.html#defining-missing-values",
     "title": "Session 1: Piping",
     "section": "Defining missing values",
-    "text": "Defining missing values\n\nthe replace() strategy for defining missing values, from Session 6 of A Slower Introduction to R can be combined with transform() and piping:\n\n\nnhanes &lt;- nhanes |&gt;\n  transform(ltpa_vigorous = replace(pad820, \n                                    pad820 == 7777 | pad820 == 9999,\n                                    NA))"
+    "text": "Defining missing values\n\nthe replace() strategy for defining missing values from Session 6 of A Slower Introduction to R can be combined with transform() and piping:\n\n\nnhanes &lt;- nhanes |&gt;\n  transform(ltpa_vigorous = replace(pad820, \n                                    pad820 == 7777 | pad820 == 9999,\n                                    NA))"
   },
   {
     "objectID": "session_1/session_1.html#defining-missing-values-1",
     "href": "session_1/session_1.html#defining-missing-values-1",
+    "title": "Session 1: Piping",
+    "section": "Defining missing values",
+    "text": "Defining missing values\n\nanother option, mentioned in Homework 6 from A Slower Introduction to R, is to use is.na()\nthat strategy can be combined with within() and piping:\n\n\nnhanes &lt;- nhanes |&gt; within({\n  lpta_vigorous &lt;- pad820\n  is.na(lpta_vigorous) &lt;- pad820 == 7777 | pad820 == 9999\n})"
+  },
+  {
+    "objectID": "session_1/session_1.html#defining-missing-values-2",
+    "href": "session_1/session_1.html#defining-missing-values-2",
     "title": "Session 1: Piping",
     "section": "Defining missing values",
     "text": "Defining missing values\n\nltpa_vigorous looks like this:\n\n\nnhanes$ltpa_vigorous |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|    1.00   30.00   45.00   60.44   60.00  900.00    4480\n\n\nwhereas pad820 looks like this:\n\n\nnhanes$pad820 |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|    1.00   30.00   45.00   97.57   60.00 9999.00    4466"
@@ -343,18 +343,18 @@
     "text": "Categorizing continuous variables\n\ncholesterol looks like this:\n\n\nnhanes$cholesterol |&gt; table(useNA='always')\n#| \n#|       Desirable Borderline high            High            &lt;NA&gt; \n#|            3695            1397             625            2436\n\n\nwhereas lbxtc looks like this:\n\n\nnhanes$lbxtc |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|      62     157     184     187     213     438    2436"
   },
   {
-    "objectID": "session_1/session_1.html#exercise-5-1",
-    "href": "session_1/session_1.html#exercise-5-1",
+    "objectID": "session_1/session_1.html#exercise-4-1",
+    "href": "session_1/session_1.html#exercise-4-1",
     "title": "Session 1: Piping",
-    "section": "Exercise 5",
-    "text": "Exercise 5\n\nUse piping and transform() to define a new variable for weight (bmxwt) in pounds. Hint: bmxwt is in kilograms and there are 2.204623 pounds in 1 kilgoram.\nUse piping, transform(), and factor() to define a new variable called sex. This should be a labelled version of the original gender variable (riagendr). Values of 1 are used for males and values of 0 are used for females. Not:, this should end up matching the existing gender variable."
+    "section": "Exercise 4",
+    "text": "Exercise 4\n\nUse piping and transform() to define a new variable for weight (bmxwt) in pounds. Hint: bmxwt is in kilograms and there are 2.204623 pounds in 1 kilgoram.\nUse piping, transform(), and factor() to define a new variable called sex. This should be a labelled version of the original gender variable (riagendr). Values of 1 are used for males and values of 0 are used for females. Not:, this should end up matching the existing gender variable."
   },
   {
-    "objectID": "session_1/session_1.html#should-i-always-use-piping",
-    "href": "session_1/session_1.html#should-i-always-use-piping",
+    "objectID": "session_1/session_1.html#should-i-always-use-piping-1",
+    "href": "session_1/session_1.html#should-i-always-use-piping-1",
     "title": "Session 1: Piping",
     "section": "Should I always use piping?",
-    "text": "Should I always use piping?\n\nit’s up to you!\npiping can be fun and satisfying\nas we’ll discuss next week, tidyverse purists tend to try to pipe everything\nI would argue, however, that non-piping code can be easy to read\nfor example:\n\n\nnhanes$ltpa_vigorous &lt;- nhanes$pad820\nis.na(nhanes$ltpa_vigorous) &lt;- nhanes$pad820 == 7777 | nhanes$pad820 == 9999"
+    "text": "Should I always use piping?\n\nit’s up to you!\npiping can be fun and satisfying\nas we’ll discuss next week, tidyverse purists tend to try to pipe everything\nI am, in general, supportive of having options…"
   },
   {
     "objectID": "index.html",
