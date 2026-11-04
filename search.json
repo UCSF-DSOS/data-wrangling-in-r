@@ -242,7 +242,7 @@
     "href": "session_2/session_2.html#categorizing-continuous-variables-2",
     "title": "Session 2: dplyr",
     "section": "Categorizing continuous variables",
-    "text": "Categorizing continuous variables\n\ncholesterol looks like this:\n\n\nnhanes |&gt; count(cholesterol)\n#|       cholesterol    n\n#| 1       Desirable 3695\n#| 2 Borderline high 1397\n#| 3            High  625\n#| 4            &lt;NA&gt; 2436"
+    "text": "Categorizing continuous variables\n\nexamining some values of lbxtc and cholesterol:\n\n\nnhanes |&gt;\n  select(c(lbxtc, cholesterol)) |&gt;\n  slice_head(n=5)\n#|   lbxtc     cholesterol\n#| 1   264            High\n#| 2   214 Borderline high\n#| 3   187       Desirable\n#| 4    NA            &lt;NA&gt;\n#| 5    NA            &lt;NA&gt;"
   },
   {
     "objectID": "session_2/session_2.html#exercise-4-1",
@@ -308,11 +308,18 @@
     "text": "Session 2: dplyr\n\nslides (opens in a new tab)"
   },
   {
-    "objectID": "index.html#session-3-merging-and-reshaping-data",
-    "href": "index.html#session-3-merging-and-reshaping-data",
+    "objectID": "index.html#session-3-merging-data",
+    "href": "index.html#session-3-merging-data",
     "title": "Data Wrangling in R",
-    "section": "Session 3: Merging and reshaping data",
-    "text": "Session 3: Merging and reshaping data\ncoming"
+    "section": "Session 3: Merging data",
+    "text": "Session 3: Merging data\ncoming"
+  },
+  {
+    "objectID": "index.html#session-4-reshaping-data",
+    "href": "index.html#session-4-reshaping-data",
+    "title": "Data Wrangling in R",
+    "section": "Session 4: Reshaping data",
+    "text": "Session 4: Reshaping data\ncoming"
   },
   {
     "objectID": "session_1/session_1.html#example-sqrt",
@@ -641,7 +648,7 @@
     "href": "session_1/session_1.html#defining-missing-values-2",
     "title": "Session 1: Piping",
     "section": "Defining missing values",
-    "text": "Defining missing values\n\nltpa_vigorous looks like this:\n\n\nnhanes$ltpa_vigorous |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|    1.00   30.00   45.00   60.44   60.00  900.00    4480\n\n\nwhereas pad820 looks like this:\n\n\nnhanes$pad820 |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|    1.00   30.00   45.00   97.57   60.00 9999.00    4466"
+    "text": "Defining missing values\n\nverifying that ltpa_vigorous is NA when pad820 is 7777 or 9999:\n\n\nnhanes |&gt;\n  subset(select = c(pad820, ltpa_vigorous)) |&gt;\n  subset(pad820 == 7777 | pad820 == 9999) |&gt;\n  head()\n#|      pad820 ltpa_vigorous\n#| 964    9999            NA\n#| 1646   9999            NA\n#| 1910   9999            NA\n#| 2136   9999            NA\n#| 2877   9999            NA\n#| 2907   9999            NA"
   },
   {
     "objectID": "session_1/session_1.html#defining-categorical-variables",
@@ -683,7 +690,7 @@
     "href": "session_1/session_1.html#categorizing-continuous-variables-2",
     "title": "Session 1: Piping",
     "section": "Categorizing continuous variables",
-    "text": "Categorizing continuous variables\n\ncholesterol looks like this:\n\n\nnhanes$cholesterol |&gt; table(useNA='always')\n#| \n#|       Desirable Borderline high            High            &lt;NA&gt; \n#|            3695            1397             625            2436\n\n\nwhereas lbxtc looks like this:\n\n\nnhanes$lbxtc |&gt; summary()\n#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs \n#|      62     157     184     187     213     438    2436"
+    "text": "Categorizing continuous variables\n\nexamining some values of lbxtc and cholesterol:\n\n\nnhanes |&gt;\n  subset(select = c(lbxtc, cholesterol)) |&gt;\n  head()\n#|   lbxtc     cholesterol\n#| 1   264            High\n#| 2   214 Borderline high\n#| 3   187       Desirable\n#| 4    NA            &lt;NA&gt;\n#| 5    NA            &lt;NA&gt;\n#| 6   183       Desirable"
   },
   {
     "objectID": "session_1/session_1.html#exercise-4-1",

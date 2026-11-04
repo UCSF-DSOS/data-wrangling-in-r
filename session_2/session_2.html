@@ -728,15 +728,18 @@ Yea-Hung Chen, PhD, MS
 <section id="categorizing-continuous-variables-2" class="slide level2">
 <h2>Categorizing continuous variables</h2>
 <ul>
-<li><code>cholesterol</code> looks like this:</li>
+<li>examining some values of <code>lbxtc</code> and <code>cholesterol</code>:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span> <span class="fu">count</span>(cholesterol)</span>
-<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|       cholesterol    n</span></span>
-<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       Desirable 3695</span></span>
-<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2 Borderline high 1397</span></span>
-<span id="cb30-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3            High  625</span></span>
-<span id="cb30-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4            &lt;NA&gt; 2436</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(lbxtc, cholesterol)) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>)</span>
+<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   lbxtc     cholesterol</span></span>
+<span id="cb30-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1   264            High</span></span>
+<span id="cb30-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2   214 Borderline high</span></span>
+<span id="cb30-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3   187       Desirable</span></span>
+<span id="cb30-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4    NA            &lt;NA&gt;</span></span>
+<span id="cb30-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5    NA            &lt;NA&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>
