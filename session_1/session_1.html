@@ -259,6 +259,19 @@ Yea-Hung Chen, PhD, MS
 </section>
 <section id="setup-for-some-coming-examples" class="slide level2">
 <h2>Setup for some coming examples</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Please focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.</p>
+</div>
+</div>
+</div>
 <ul>
 <li>load some packages:</li>
 </ul>
@@ -400,9 +413,12 @@ Yea-Hung Chen, PhD, MS
 <h2>So how do I do this?</h2>
 <ul>
 <li>in general, the pattern is: <strong>argument <code>|&gt; function()</code></strong></li>
-<li>more precisely, because many functions have multiple possible arguments, the pattern is: <strong>first argument of the function <code>|&gt; function()</code></strong></li>
+<li>more precisely, the typical usage is: <strong>first argument of the function <code>|&gt; function()</code></strong></li>
 </ul>
-</section>
+
+<aside><div>
+<p>You can actually use pipe the second or third (or greater) argument, but I won’t show you how to do that today.</p>
+</div></aside></section>
 <section id="mean" class="slide level2">
 <h2><code>mean()</code></h2>
 <ul>
@@ -480,6 +496,59 @@ Yea-Hung Chen, PhD, MS
 <li>each pipe adds to the result up to that point</li>
 <li>for example, the third line calls for scooping the chilled dough</li>
 </ul>
+</section>
+<section id="keep-writing-comments" class="slide level2">
+<h2>Keep writing comments</h2>
+<ul>
+<li>it is common practice to write long pipelines without any comments 😢</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Keep writing comments!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="keep-writing-comments-1" class="slide level2">
+<h2>Keep writing comments</h2>
+<ul>
+<li>I suggest writing <strong>short pipelines with comments</strong>, like this:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># subset to people born outside of the us</span></span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> <span class="fu">subset</span>(country<span class="sc">==</span><span class="st">'Other'</span>) </span>
+<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># define age in months</span></span>
+<span id="cb19-5"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> <span class="fu">transform</span>(<span class="at">months=</span>ridageyr<span class="sc">*</span><span class="dv">12</span>)</span>
+<span id="cb19-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># define height in feet</span></span>
+<span id="cb19-8"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> <span class="fu">transform</span>(<span class="at">height_feet=</span>bmxht<span class="sc">*</span><span class="fl">0.3937008</span><span class="sc">/</span><span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="keep-writing-comments-2" class="slide level2">
+<h2>Keep writing comments</h2>
+<ul>
+<li>if you want to write long pipelines, I suggest writing comments within the pipeline, like this:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="co"># subset to people born outside of the us</span></span>
+<span id="cb20-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(country<span class="sc">==</span><span class="st">'Other'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="co"># define age in months</span></span>
+<span id="cb20-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">months=</span>ridageyr<span class="sc">*</span><span class="dv">12</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb20-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="co"># define height in feet  </span></span>
+<span id="cb20-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">height_feet=</span>bmxht<span class="sc">*</span><span class="fl">0.3937008</span><span class="sc">/</span><span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section></section>
 <section>
 <section id="exercise-1" class="title-slide slide level1 center" data-stack-name="E1">
@@ -510,11 +579,24 @@ Yea-Hung Chen, PhD, MS
 </section>
 <section id="setup-for-some-coming-examples-1" class="slide level2">
 <h2>Setup for some coming examples</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Please focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.</p>
+</div>
+</div>
+</div>
 <ul>
 <li>define a mini version of the NHANES data:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> nhanes[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="fu">c</span>(<span class="st">'ridageyr'</span>, <span class="st">'asthma'</span>, <span class="st">'smoking'</span>, <span class="st">'bmxht'</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> nhanes[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="fu">c</span>(<span class="st">'ridageyr'</span>, <span class="st">'asthma'</span>, <span class="st">'smoking'</span>, <span class="st">'bmxht'</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <aside><div>
@@ -526,14 +608,14 @@ Yea-Hung Chen, PhD, MS
 <li>the first few rows of <code>minidata</code> are:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
-<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr            asthma            smoking bmxht</span></span>
-<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43                No History of smoking 179.5</span></span>
-<span id="cb20-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66                No History of smoking 174.2</span></span>
-<span id="cb20-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3       44                No                 No 152.9</span></span>
-<span id="cb20-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4       43                No                 No    NA</span></span>
-<span id="cb20-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5       65 History of asthma                 No    NA</span></span>
-<span id="cb20-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34                No History of smoking 173.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr            asthma            smoking bmxht</span></span>
+<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43                No History of smoking 179.5</span></span>
+<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66                No History of smoking 174.2</span></span>
+<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3       44                No                 No 152.9</span></span>
+<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4       43                No                 No    NA</span></span>
+<span id="cb22-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5       65 History of asthma                 No    NA</span></span>
+<span id="cb22-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34                No History of smoking 173.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <aside><div>
@@ -545,12 +627,12 @@ Yea-Hung Chen, PhD, MS
 <li>to subset to people with a history of smoking:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, smoking <span class="sc">==</span> <span class="st">'History of smoking'</span>)</span>
-<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr asthma            smoking bmxht</span></span>
-<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43     No History of smoking 179.5</span></span>
-<span id="cb21-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66     No History of smoking 174.2</span></span>
-<span id="cb21-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34     No History of smoking 173.3</span></span>
-<span id="cb21-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8       27     No History of smoking 168.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, smoking <span class="sc">==</span> <span class="st">'History of smoking'</span>)</span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr asthma            smoking bmxht</span></span>
+<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43     No History of smoking 179.5</span></span>
+<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66     No History of smoking 174.2</span></span>
+<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34     No History of smoking 173.3</span></span>
+<span id="cb23-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8       27     No History of smoking 168.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="subset-with-piping" class="slide level2">
@@ -559,12 +641,12 @@ Yea-Hung Chen, PhD, MS
 <li>with piping:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(smoking <span class="sc">==</span> <span class="st">'History of smoking'</span>)</span>
-<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr asthma            smoking bmxht</span></span>
-<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43     No History of smoking 179.5</span></span>
-<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66     No History of smoking 174.2</span></span>
-<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34     No History of smoking 173.3</span></span>
-<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8       27     No History of smoking 168.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(smoking <span class="sc">==</span> <span class="st">'History of smoking'</span>)</span>
+<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr asthma            smoking bmxht</span></span>
+<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43     No History of smoking 179.5</span></span>
+<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66     No History of smoking 174.2</span></span>
+<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34     No History of smoking 173.3</span></span>
+<span id="cb24-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8       27     No History of smoking 168.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>
@@ -575,7 +657,7 @@ Yea-Hung Chen, PhD, MS
 <section id="exercise-2-1" class="slide level2">
 <h2>Exercise 2</h2>
 <ol type="1">
-<li><p>Use piping to subset the data to individuals with a history of smoking (<code>smoking</code>). Hint: first use <code>table()</code> or <code>unique()</code> to see the unique values of <code>smoking</code>.</p></li>
+<li><p>Use piping with <code>subset()</code> to subset the data to individuals with a history of smoking (<code>smoking</code>). Hint: first use <code>table()</code> or <code>unique()</code> to see the unique values of <code>smoking</code>.</p></li>
 <li><p>Use piping with <code>subset()</code> to subset the data to individuals who are 25 years of age or younger.</p></li>
 </ol>
 </section>
@@ -594,19 +676,19 @@ Yea-Hung Chen, PhD, MS
 <section id="subsets-select" class="slide level2">
 <h2><code>subset()</code>’s <code>select</code></h2>
 <ul>
-<li>to select just the <code>asthma</code> and <code>smoking</code> variables:</li>
+<li>to select just the <code>asthma</code> variable:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, <span class="at">select =</span> <span class="fu">c</span>(asthma, smoking))</span>
-<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|              asthma            smoking</span></span>
-<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1                No History of smoking</span></span>
-<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2                No History of smoking</span></span>
-<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3                No                 No</span></span>
-<span id="cb23-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4                No                 No</span></span>
-<span id="cb23-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5 History of asthma                 No</span></span>
-<span id="cb23-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6                No History of smoking</span></span>
-<span id="cb23-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 7                No                 No</span></span>
-<span id="cb23-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8                No History of smoking</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, <span class="at">select =</span> asthma)</span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|              asthma</span></span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1                No</span></span>
+<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2                No</span></span>
+<span id="cb25-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3                No</span></span>
+<span id="cb25-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4                No</span></span>
+<span id="cb25-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5 History of asthma</span></span>
+<span id="cb25-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6                No</span></span>
+<span id="cb25-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 7                No</span></span>
+<span id="cb25-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8                No</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="subsets-select-with-piping" class="slide level2">
@@ -615,17 +697,80 @@ Yea-Hung Chen, PhD, MS
 <li>with piping:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(asthma, smoking))</span>
-<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|              asthma            smoking</span></span>
-<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1                No History of smoking</span></span>
-<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2                No History of smoking</span></span>
-<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3                No                 No</span></span>
-<span id="cb24-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4                No                 No</span></span>
-<span id="cb24-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5 History of asthma                 No</span></span>
-<span id="cb24-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6                No History of smoking</span></span>
-<span id="cb24-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 7                No                 No</span></span>
-<span id="cb24-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8                No History of smoking</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select =</span> asthma)</span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|              asthma</span></span>
+<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1                No</span></span>
+<span id="cb26-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2                No</span></span>
+<span id="cb26-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3                No</span></span>
+<span id="cb26-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4                No</span></span>
+<span id="cb26-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5 History of asthma</span></span>
+<span id="cb26-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6                No</span></span>
+<span id="cb26-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 7                No</span></span>
+<span id="cb26-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8                No</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="subsets-select-with-piping-1" class="slide level2">
+<h2><code>subset()</code>’s <code>select</code> with piping</h2>
+<ul>
+<li>to select just the <code>asthma</code> and <code>smoking</code> variables:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(asthma, smoking))</span>
+<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|              asthma            smoking</span></span>
+<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1                No History of smoking</span></span>
+<span id="cb27-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2                No History of smoking</span></span>
+<span id="cb27-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3                No                 No</span></span>
+<span id="cb27-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4                No                 No</span></span>
+<span id="cb27-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5 History of asthma                 No</span></span>
+<span id="cb27-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6                No History of smoking</span></span>
+<span id="cb27-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 7                No                 No</span></span>
+<span id="cb27-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8                No History of smoking</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>notice the use of <strong><code>c()</code></strong> to list the variables</li>
+</ul>
+<!--
+## `keep()`
+
+
+::: {.cell}
+
+```{.r .cell-code}
+minidata |> subset(select = c(asthma, smoking))
+#|              asthma            smoking
+#| 1                No History of smoking
+#| 2                No History of smoking
+#| 3                No                 No
+#| 4                No                 No
+#| 5 History of asthma                 No
+#| 6                No History of smoking
+#| 7                No                 No
+#| 8                No History of smoking
+```
+:::
+
+
+- when you use `subset()` in this way, you must include the `select` argument name, since `select` is actually the third argument
+- you can avoid typing the argument name by using **`keep()`**, from my `baseverse` package:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+minidata |> keep(c(asthma, smoking))
+#|              asthma            smoking
+#| 1                No History of smoking
+#| 2                No History of smoking
+#| 3                No                 No
+#| 4                No                 No
+#| 5 History of asthma                 No
+#| 6                No History of smoking
+#| 7                No                 No
+#| 8                No History of smoking
+```
+:::
+
+-->
 </section></section>
 <section>
 <section id="dropping-variables" class="title-slide slide level1 center" data-stack-name="Dropping variables">
@@ -635,87 +780,111 @@ Yea-Hung Chen, PhD, MS
 <section id="subsets-select-1" class="slide level2">
 <h2><code>subset()</code>’s <code>select</code></h2>
 <ul>
-<li>to drop the <code>ridageyr</code> variable:</li>
+<li>to drop the <code>asthma</code> variable:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, <span class="at">select =</span> <span class="sc">-</span>ridageyr)</span>
-<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|              asthma            smoking bmxht</span></span>
-<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1                No History of smoking 179.5</span></span>
-<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2                No History of smoking 174.2</span></span>
-<span id="cb25-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3                No                 No 152.9</span></span>
-<span id="cb25-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4                No                 No    NA</span></span>
-<span id="cb25-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5 History of asthma                 No    NA</span></span>
-<span id="cb25-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6                No History of smoking 173.3</span></span>
-<span id="cb25-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 7                No                 No 155.9</span></span>
-<span id="cb25-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8                No History of smoking 168.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, <span class="at">select =</span> <span class="sc">-</span>asthma)</span>
+<span id="cb28-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr            smoking bmxht</span></span>
+<span id="cb28-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43 History of smoking 179.5</span></span>
+<span id="cb28-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66 History of smoking 174.2</span></span>
+<span id="cb28-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3       44                 No 152.9</span></span>
+<span id="cb28-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4       43                 No    NA</span></span>
+<span id="cb28-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5       65                 No    NA</span></span>
+<span id="cb28-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34 History of smoking 173.3</span></span>
+<span id="cb28-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 7       68                 No 155.9</span></span>
+<span id="cb28-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 8       27 History of smoking 168.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
-<li>notice the minus sign</li>
+<li>notice the <strong>minus sign</strong></li>
 </ul>
 </section>
-<section id="dropping-variables-1" class="slide level2" data-stack-name="Dropping variables">
-<h2>Dropping variables</h2>
+<section id="subsets-select-2" class="slide level2">
+<h2><code>subset()</code>’s <code>select</code></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, <span class="at">select =</span> <span class="sc">-</span>ridageyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidata, <span class="at">select =</span> <span class="sc">-</span>asthma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
-<li>this simply returns a version of the data without the <code>ridageyr</code> variable</li>
+<li>this simply returns a version of the data without the <code>asthma</code> variable</li>
 <li><code>minidata</code> remains untouched</li>
 <li>to truly drop a variable, use <strong>object assignment</strong> to replace <code>minidata</code>:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> <span class="fu">subset</span>(minidata, <span class="at">select =</span> <span class="sc">-</span>asthma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="subsets-select-with-piping-1" class="slide level2">
-<h2><code>subset()</code>’s <code>select</code> with piping</h2>
-<ul>
-<li>with piping:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select =</span> <span class="sc">-</span>asthma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<ul>
-<li><code>minidata</code> now looks like this:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
-<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr            smoking bmxht</span></span>
-<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43 History of smoking 179.5</span></span>
-<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66 History of smoking 174.2</span></span>
-<span id="cb29-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3       44                 No 152.9</span></span>
-<span id="cb29-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4       43                 No    NA</span></span>
-<span id="cb29-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5       65                 No    NA</span></span>
-<span id="cb29-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34 History of smoking 173.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> <span class="fu">subset</span>(minidata, <span class="at">select =</span> <span class="sc">-</span>asthma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="subsets-select-with-piping-2" class="slide level2">
 <h2><code>subset()</code>’s <code>select</code> with piping</h2>
 <ul>
+<li>with piping:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select =</span> <span class="sc">-</span>asthma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li><code>minidata</code> now looks like this:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
+<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   ridageyr            smoking bmxht</span></span>
+<span id="cb32-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1       43 History of smoking 179.5</span></span>
+<span id="cb32-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2       66 History of smoking 174.2</span></span>
+<span id="cb32-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3       44                 No 152.9</span></span>
+<span id="cb32-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4       43                 No    NA</span></span>
+<span id="cb32-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5       65                 No    NA</span></span>
+<span id="cb32-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6       34 History of smoking 173.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="subsets-select-with-piping-3" class="slide level2">
+<h2><code>subset()</code>’s <code>select</code> with piping</h2>
+<ul>
 <li>to drop the <code>ridageyr</code> and <code>smoking</code> variables with piping:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(ridageyr, smoking))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(ridageyr, smoking))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
-<li>notice the minus sign and <code>c()</code></li>
+<li>notice the <strong>minus sign</strong></li>
+<li>notice the use of <strong><code>c()</code></strong> to list variables</li>
 </ul>
 </section>
-<section id="subsets-select-with-piping-3" class="slide level2">
+<section id="subsets-select-with-piping-4" class="slide level2">
 <h2><code>subset()</code>’s <code>select</code> with piping</h2>
 <ul>
 <li><code>minidata</code> now looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
-<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   bmxht</span></span>
-<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1 179.5</span></span>
-<span id="cb31-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2 174.2</span></span>
-<span id="cb31-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3 152.9</span></span>
-<span id="cb31-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4    NA</span></span>
-<span id="cb31-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5    NA</span></span>
-<span id="cb31-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6 173.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
+<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   bmxht</span></span>
+<span id="cb34-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1 179.5</span></span>
+<span id="cb34-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2 174.2</span></span>
+<span id="cb34-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3 152.9</span></span>
+<span id="cb34-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4    NA</span></span>
+<span id="cb34-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5    NA</span></span>
+<span id="cb34-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6 173.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<!--
+## `keep()`
+
+
+::: {.cell}
+
+```{.r .cell-code}
+minidata <- minidata |> subset(select = -c(ridageyr, smoking))
+```
+:::
+
+
+- you can avoid typing the argument name by using **`keep()`**, from my `baseverse` package:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+minidata <- minidata |> keep(c(ridageyr, smoking))
+```
+:::
+
+-->
 </section></section>
 <section>
 <section id="exercise-3" class="title-slide slide level1 center" data-stack-name="E3">
@@ -741,7 +910,7 @@ Yea-Hung Chen, PhD, MS
 <li>to define a new variable:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>new_variable<span class="ot">&lt;-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>new_variable<span class="ot">&lt;-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="transform" class="slide level2">
@@ -750,7 +919,7 @@ Yea-Hung Chen, PhD, MS
 <li>equivalently, use the <code>transform()</code> function:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> <span class="fu">transform</span>(minidata, <span class="at">new_variable =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> <span class="fu">transform</span>(minidata, <span class="at">new_variable =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>here, <code>transform()</code> returns a version of <code>minidata</code> with a new variable added called <code>new_variable</code></li>
@@ -761,7 +930,7 @@ Yea-Hung Chen, PhD, MS
 <section id="transform-1" class="slide level2">
 <h2><code>transform()</code></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> <span class="fu">transform</span>(minidata, <span class="at">new_variable =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> <span class="fu">transform</span>(minidata, <span class="at">new_variable =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>in general, the second argument is: <strong>variable name <code>=</code> definition of new variable</strong></li>
@@ -773,21 +942,21 @@ Yea-Hung Chen, PhD, MS
 <li>with piping:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span></span>
-<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">new_variable =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">new_variable =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><code>minidata</code> now looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
-<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   bmxht new_variable</span></span>
-<span id="cb36-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1 179.5            1</span></span>
-<span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2 174.2            1</span></span>
-<span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3 152.9            1</span></span>
-<span id="cb36-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4    NA            1</span></span>
-<span id="cb36-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5    NA            1</span></span>
-<span id="cb36-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6 173.3            1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   bmxht new_variable</span></span>
+<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1 179.5            1</span></span>
+<span id="cb39-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2 174.2            1</span></span>
+<span id="cb39-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3 152.9            1</span></span>
+<span id="cb39-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4    NA            1</span></span>
+<span id="cb39-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5    NA            1</span></span>
+<span id="cb39-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6 173.3            1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="transform-with-piping-1" class="slide level2">
@@ -796,21 +965,21 @@ Yea-Hung Chen, PhD, MS
 <li>to convert <code>bmxht</code> to inches:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span></span>
-<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">height =</span> bmxht <span class="sc">*</span> <span class="fl">0.3937008</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> minidata <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">height =</span> bmxht <span class="sc">*</span> <span class="fl">0.3937008</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><code>minidata</code> now looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
-<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   bmxht new_variable   height</span></span>
-<span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1 179.5            1 70.66929</span></span>
-<span id="cb38-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2 174.2            1 68.58268</span></span>
-<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3 152.9            1 60.19685</span></span>
-<span id="cb38-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4    NA            1       NA</span></span>
-<span id="cb38-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5    NA            1       NA</span></span>
-<span id="cb38-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6 173.3            1 68.22835</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   bmxht new_variable   height</span></span>
+<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 1 179.5            1 70.66929</span></span>
+<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 2 174.2            1 68.58268</span></span>
+<span id="cb41-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 3 152.9            1 60.19685</span></span>
+<span id="cb41-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 4    NA            1       NA</span></span>
+<span id="cb41-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 5    NA            1       NA</span></span>
+<span id="cb41-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6 173.3            1 68.22835</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="defining-missing-values" class="slide level2">
@@ -819,10 +988,10 @@ Yea-Hung Chen, PhD, MS
 <li>the <code>replace()</code> strategy for defining missing values from Session 6 of <a href="https://ucsf-dsos.github.io/a-slower-introduction-to-r/"><em>A Slower Introduction to R</em></a> can be combined with <code>transform()</code> and piping:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> </span>
-<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(</span>
-<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ltpa_vigorous =</span> <span class="fu">replace</span>(pad820, pad820 <span class="sc">==</span> <span class="dv">7777</span> <span class="sc">|</span> pad820 <span class="sc">==</span> <span class="dv">9999</span>, <span class="cn">NA</span>)</span>
-<span id="cb39-4"><a aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(</span>
+<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ltpa_vigorous =</span> <span class="fu">replace</span>(pad820, pad820 <span class="sc">==</span> <span class="dv">7777</span> <span class="sc">|</span> pad820 <span class="sc">==</span> <span class="dv">9999</span>, <span class="cn">NA</span>)</span>
+<span id="cb42-4"><a aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="defining-missing-values-1" class="slide level2">
@@ -832,10 +1001,10 @@ Yea-Hung Chen, PhD, MS
 <li>that strategy can be combined with <strong><code>within()</code></strong> and piping:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> <span class="fu">within</span>({</span>
-<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a>  ltpa_vigorous <span class="ot">&lt;-</span> pad820</span>
-<span id="cb40-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(ltpa_vigorous) <span class="ot">&lt;-</span> pad820 <span class="sc">==</span> <span class="dv">7777</span> <span class="sc">|</span> pad820 <span class="sc">==</span> <span class="dv">9999</span></span>
-<span id="cb40-4"><a aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span> <span class="fu">within</span>({</span>
+<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a>  ltpa_vigorous <span class="ot">&lt;-</span> pad820</span>
+<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(ltpa_vigorous) <span class="ot">&lt;-</span> pad820 <span class="sc">==</span> <span class="dv">7777</span> <span class="sc">|</span> pad820 <span class="sc">==</span> <span class="dv">9999</span></span>
+<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="defining-missing-values-2" class="slide level2">
@@ -844,17 +1013,17 @@ Yea-Hung Chen, PhD, MS
 <li><code>ltpa_vigorous</code> looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>ltpa_vigorous <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs </span></span>
-<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    1.00   30.00   45.00   60.44   60.00  900.00    4480</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>ltpa_vigorous <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs </span></span>
+<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    1.00   30.00   45.00   60.44   60.00  900.00    4480</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>whereas <code>pad820</code> looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>pad820 <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs </span></span>
-<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    1.00   30.00   45.00   97.57   60.00 9999.00    4466</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>pad820 <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs </span></span>
+<span id="cb45-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    1.00   30.00   45.00   97.57   60.00 9999.00    4466</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="defining-categorical-variables" class="slide level2">
@@ -869,19 +1038,19 @@ Yea-Hung Chen, PhD, MS
 <li>using <code>factor()</code>:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">country =</span> <span class="fu">factor</span>(</span>
-<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a>    dmdborn4,</span>
-<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'USA'</span>, <span class="st">'Other'</span>)</span>
-<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">country =</span> <span class="fu">factor</span>(</span>
+<span id="cb46-3"><a aria-hidden="true" tabindex="-1"></a>    dmdborn4,</span>
+<span id="cb46-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb46-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'USA'</span>, <span class="st">'Other'</span>)</span>
+<span id="cb46-6"><a aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>or, using <code>base_match()</code> from my <code>baseverse</code> package:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">country =</span> <span class="fu">base_match</span>(dmdborn4, <span class="st">'USA'</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">'Other'</span> <span class="ot">=</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">country =</span> <span class="fu">base_match</span>(dmdborn4, <span class="st">'USA'</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">'Other'</span> <span class="ot">=</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="labeling-categorical-variables-1" class="slide level2">
@@ -890,19 +1059,19 @@ Yea-Hung Chen, PhD, MS
 <li><code>country</code> looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>country <span class="sc">|&gt;</span> <span class="fu">table</span>(<span class="at">useNA=</span><span class="st">'always'</span>)</span>
-<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb45-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   USA Other  &lt;NA&gt; </span></span>
-<span id="cb45-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|  6519  1617    17</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>country <span class="sc">|&gt;</span> <span class="fu">table</span>(<span class="at">useNA=</span><span class="st">'always'</span>)</span>
+<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb48-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|   USA Other  &lt;NA&gt; </span></span>
+<span id="cb48-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|  6519  1617    17</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>whereas <code>dmdborn4</code> looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>dmdborn4 <span class="sc">|&gt;</span> <span class="fu">table</span>(<span class="at">useNA=</span><span class="st">'always'</span>)</span>
-<span id="cb46-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb46-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    1    2 &lt;NA&gt; </span></span>
-<span id="cb46-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6519 1617   17</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>dmdborn4 <span class="sc">|&gt;</span> <span class="fu">table</span>(<span class="at">useNA=</span><span class="st">'always'</span>)</span>
+<span id="cb49-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb49-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    1    2 &lt;NA&gt; </span></span>
+<span id="cb49-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 6519 1617   17</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="categorizing-continuous-variables" class="slide level2">
@@ -911,13 +1080,13 @@ Yea-Hung Chen, PhD, MS
 <li>using <code>cut()</code>:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb47-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">cholesterol =</span> <span class="fu">cut</span>(</span>
-<span id="cb47-3"><a aria-hidden="true" tabindex="-1"></a>    lbxtc,</span>
-<span id="cb47-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">240</span>, <span class="cn">Inf</span>),</span>
-<span id="cb47-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'Desirable'</span>, <span class="st">'Borderline high'</span>, <span class="st">'High'</span>),</span>
-<span id="cb47-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> <span class="cn">FALSE</span></span>
-<span id="cb47-7"><a aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
+<span id="cb50-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">cholesterol =</span> <span class="fu">cut</span>(</span>
+<span id="cb50-3"><a aria-hidden="true" tabindex="-1"></a>    lbxtc,</span>
+<span id="cb50-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">240</span>, <span class="cn">Inf</span>),</span>
+<span id="cb50-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'Desirable'</span>, <span class="st">'Borderline high'</span>, <span class="st">'High'</span>),</span>
+<span id="cb50-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">right =</span> <span class="cn">FALSE</span></span>
+<span id="cb50-7"><a aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="categorizing-continuous-variables-1" class="slide level2">
@@ -926,12 +1095,12 @@ Yea-Hung Chen, PhD, MS
 <li>or, using <code>base_when()</code> from my <code>baseverse</code> package:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">cholesterol =</span> <span class="fu">base_when</span>(</span>
-<span id="cb48-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'Desirable'</span> <span class="ot">=</span> (lbxtc <span class="sc">&lt;</span> <span class="dv">200</span>),</span>
-<span id="cb48-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'Borderline high'</span> <span class="ot">=</span> (lbxtc <span class="sc">&gt;=</span> <span class="dv">200</span>) <span class="sc">&amp;</span> (lbxtc <span class="sc">&lt;</span> <span class="dv">240</span>),</span>
-<span id="cb48-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'High'</span> <span class="ot">=</span> (lbxtc <span class="sc">&gt;=</span> <span class="dv">240</span>)</span>
-<span id="cb48-6"><a aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
+<span id="cb51-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">cholesterol =</span> <span class="fu">base_when</span>(</span>
+<span id="cb51-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'Desirable'</span> <span class="ot">=</span> (lbxtc <span class="sc">&lt;</span> <span class="dv">200</span>),</span>
+<span id="cb51-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'Borderline high'</span> <span class="ot">=</span> (lbxtc <span class="sc">&gt;=</span> <span class="dv">200</span>) <span class="sc">&amp;</span> (lbxtc <span class="sc">&lt;</span> <span class="dv">240</span>),</span>
+<span id="cb51-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'High'</span> <span class="ot">=</span> (lbxtc <span class="sc">&gt;=</span> <span class="dv">240</span>)</span>
+<span id="cb51-6"><a aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="categorizing-continuous-variables-2" class="slide level2">
@@ -940,18 +1109,18 @@ Yea-Hung Chen, PhD, MS
 <li><code>cholesterol</code> looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>cholesterol <span class="sc">|&gt;</span> <span class="fu">table</span>(<span class="at">useNA=</span><span class="st">'always'</span>)</span>
-<span id="cb49-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb49-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|       Desirable Borderline high            High            &lt;NA&gt; </span></span>
-<span id="cb49-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|            3695            1397             625            2436</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>cholesterol <span class="sc">|&gt;</span> <span class="fu">table</span>(<span class="at">useNA=</span><span class="st">'always'</span>)</span>
+<span id="cb52-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb52-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|       Desirable Borderline high            High            &lt;NA&gt; </span></span>
+<span id="cb52-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|            3695            1397             625            2436</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>whereas <code>lbxtc</code> looks like this:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>lbxtc <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
-<span id="cb50-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs </span></span>
-<span id="cb50-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|      62     157     184     187     213     438    2436</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a aria-hidden="true" tabindex="-1"></a>nhanes<span class="sc">$</span>lbxtc <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
+<span id="cb53-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs </span></span>
+<span id="cb53-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|      62     157     184     187     213     438    2436</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>

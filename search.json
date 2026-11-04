@@ -1,5 +1,320 @@
 [
   {
+    "objectID": "session_2/session_2.html#what-is-dplyr",
+    "href": "session_2/session_2.html#what-is-dplyr",
+    "title": "Session 2: dplyr",
+    "section": "What is dplyr",
+    "text": "What is dplyr\n\ndplyr is a core package of the tidyverse\nit supports data wrangling"
+  },
+  {
+    "objectID": "session_2/session_2.html#what-is-the-tidyverse",
+    "href": "session_2/session_2.html#what-is-the-tidyverse",
+    "title": "Session 2: dplyr",
+    "section": "What is the tidyverse?",
+    "text": "What is the tidyverse?\n\nthe tidyverse is a collection of packages supporting a shared way of doing things, which I’ll call the tidyverse approach\nthere are 9 core tidyverse packages\nthere are also numerous other packages that share the tidyverse approach"
+  },
+  {
+    "objectID": "session_2/session_2.html#so-what-is-the-tidyverse-approach",
+    "href": "session_2/session_2.html#so-what-is-the-tidyverse-approach",
+    "title": "Session 2: dplyr",
+    "section": "So what is the tidyverse approach?",
+    "text": "So what is the tidyverse approach?\n\nthe tidyverse approach involves:\n\npiping everything\nusing tidyverse functions\navoiding dollar-sign notation\ninsisting on two-dimensional output"
+  },
+  {
+    "objectID": "session_2/session_2.html#setup-for-some-coming-examples",
+    "href": "session_2/session_2.html#setup-for-some-coming-examples",
+    "title": "Session 2: dplyr",
+    "section": "Setup for some coming examples",
+    "text": "Setup for some coming examples\n\nload dplyr:\n\n\nlibrary(dplyr)\n\n\nimport the NHANES data:\n\n\nnhanes &lt;- read.csv('nhanes_l.csv')"
+  },
+  {
+    "objectID": "session_2/session_2.html#setup-for-some-coming-examples-1",
+    "href": "session_2/session_2.html#setup-for-some-coming-examples-1",
+    "title": "Session 2: dplyr",
+    "section": "Setup for some coming examples",
+    "text": "Setup for some coming examples\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes |&gt;\n  slice(1:7) |&gt;\n  select(seqn, ridageyr, bpxosy1, bpxodi1)"
+  },
+  {
+    "objectID": "session_2/session_2.html#piping-everything",
+    "href": "session_2/session_2.html#piping-everything",
+    "title": "Session 2: dplyr",
+    "section": "Piping everything",
+    "text": "Piping everything\n\nusing base R, we could view the first few rows of minidata like this:\n\n\nhead(minidata)\n#|     seqn ridageyr bpxosy1 bpxodi1\n#| 1 130378       43     135      98\n#| 2 130379       66     121      84\n#| 3 130380       44     111      79\n#| 4 130384       43      NA      NA\n#| 5 130385       65      NA      NA\n#| 6 130386       34     110      72"
+  },
+  {
+    "objectID": "session_2/session_2.html#piping-everything-1",
+    "href": "session_2/session_2.html#piping-everything-1",
+    "title": "Session 2: dplyr",
+    "section": "Piping everything",
+    "text": "Piping everything\n\ntidyverse users would tend to always use piping:\n\n\nminidata |&gt; head()\n#|     seqn ridageyr bpxosy1 bpxodi1\n#| 1 130378       43     135      98\n#| 2 130379       66     121      84\n#| 3 130380       44     111      79\n#| 4 130384       43      NA      NA\n#| 5 130385       65      NA      NA\n#| 6 130386       34     110      72"
+  },
+  {
+    "objectID": "session_2/session_2.html#using-tidyverse-functions",
+    "href": "session_2/session_2.html#using-tidyverse-functions",
+    "title": "Session 2: dplyr",
+    "section": "Using tidyverse functions",
+    "text": "Using tidyverse functions\n\ntidyverse purists would probably use slice_head() from dplyr:\n\n\nminidata |&gt; slice_head(n = 6)\n#|     seqn ridageyr bpxosy1 bpxodi1\n#| 1 130378       43     135      98\n#| 2 130379       66     121      84\n#| 3 130380       44     111      79\n#| 4 130384       43      NA      NA\n#| 5 130385       65      NA      NA\n#| 6 130386       34     110      72"
+  },
+  {
+    "objectID": "session_2/session_2.html#insisting-on-two-dimensional-output",
+    "href": "session_2/session_2.html#insisting-on-two-dimensional-output",
+    "title": "Session 2: dplyr",
+    "section": "Insisting on two-dimensional output",
+    "text": "Insisting on two-dimensional output\n\nthe tidyverse approach insists on two-dimensional output\n\n\n\nMore specifically, the tidyverse users prefer a two-dimensional object class known as a tibble."
+  },
+  {
+    "objectID": "session_2/session_2.html#insisting-on-two-dimensional-output-1",
+    "href": "session_2/session_2.html#insisting-on-two-dimensional-output-1",
+    "title": "Session 2: dplyr",
+    "section": "Insisting on two-dimensional output",
+    "text": "Insisting on two-dimensional output\n\nfor example, to find the mean level of systolic blood pressure using base R:\n\n\nmean(nhanes$bpxosy1, na.rm = TRUE) \n#| [1] 122.5617\n\n\nor, using dollar() from my baseverse package:\n\n\nnhanes |&gt; dollar(bpxosy1) |&gt; mean(na.rm = TRUE)\n#| [1] 122.5617"
+  },
+  {
+    "objectID": "session_2/session_2.html#insisting-on-two-dimensional-output-2",
+    "href": "session_2/session_2.html#insisting-on-two-dimensional-output-2",
+    "title": "Session 2: dplyr",
+    "section": "Insisting on two-dimensional output",
+    "text": "Insisting on two-dimensional output\n\ntidyverse users would do this instead:\n\n\nminidata |&gt; summarize(mean = mean(bpxosy1, na.rm = TRUE))\n#|   mean\n#| 1  124\n\n\nthe result is a data frame, not a single number:\n\n\nminidata |&gt; \n  summarize(mean(bpxosy1, na.rm = TRUE)) |&gt;\n  class()\n#| [1] \"data.frame\""
+  },
+  {
+    "objectID": "session_2/session_2.html#why-should-i-use-dplyr",
+    "href": "session_2/session_2.html#why-should-i-use-dplyr",
+    "title": "Session 2: dplyr",
+    "section": "Why should I use dplyr?",
+    "text": "Why should I use dplyr?\n\ndplyr and the tidyverse are enormously popular\ndplyr also includes functions and approaches that people argue to be easier to understand or easier to read than base-R equivalents\nin some cases, dplyr or tidyverse functions can be faster than base-R equivalents"
+  },
+  {
+    "objectID": "session_2/session_2.html#why-should-i-not-use-dplyr",
+    "href": "session_2/session_2.html#why-should-i-not-use-dplyr",
+    "title": "Session 2: dplyr",
+    "section": "Why should I not use dplyr?",
+    "text": "Why should I not use dplyr?\n\nmy opinion: dplyr and tidyverse are bloated, with a lot of functions overall, including functions that reproduce base-R functions or features\nmy opinion: the tidyverse approach is too strict\nmy opinion: the introduction of piping to base R makes dplyr and tidyverse feel even more redundant"
+  },
+  {
+    "objectID": "session_2/session_2.html#why-should-i-learn-dplyr",
+    "href": "session_2/session_2.html#why-should-i-learn-dplyr",
+    "title": "Session 2: dplyr",
+    "section": "Why should I learn dplyr?",
+    "text": "Why should I learn dplyr?\n\nit’s good to understand at least a little bit of dplyr—even if you don’t plan on using it—because it’s so popular"
+  },
+  {
+    "objectID": "session_2/session_2.html#setup-for-some-coming-examples-2",
+    "href": "session_2/session_2.html#setup-for-some-coming-examples-2",
+    "title": "Session 2: dplyr",
+    "section": "Setup for some coming examples",
+    "text": "Setup for some coming examples\n\n\n\n\n\n\nTip\n\n\nPlease focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.\n\n\n\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes |&gt;\n  slice(1:8) |&gt;\n  select(ridageyr, asthma, smoking, bmxht)"
+  },
+  {
+    "objectID": "session_2/session_2.html#setup-for-some-coming-examples-3",
+    "href": "session_2/session_2.html#setup-for-some-coming-examples-3",
+    "title": "Session 2: dplyr",
+    "section": "Setup for some coming examples",
+    "text": "Setup for some coming examples\n\nthe first few rows of minidata are:\n\n\nminidata |&gt; slice_head(n = 6)\n#|   ridageyr            asthma            smoking bmxht\n#| 1       43                No History of smoking 179.5\n#| 2       66                No History of smoking 174.2\n#| 3       44                No                 No 152.9\n#| 4       43                No                 No    NA\n#| 5       65 History of asthma                 No    NA\n#| 6       34                No History of smoking 173.3\n\n\n\nFor the exercises, please continue to use the full NHANES data."
+  },
+  {
+    "objectID": "session_2/session_2.html#filter",
+    "href": "session_2/session_2.html#filter",
+    "title": "Session 2: dplyr",
+    "section": "filter()",
+    "text": "filter()\n\nto subset to people with a history of smoking:\n\n\nminidata |&gt; filter(smoking == 'History of smoking')\n#|   ridageyr asthma            smoking bmxht\n#| 1       43     No History of smoking 179.5\n#| 2       66     No History of smoking 174.2\n#| 3       34     No History of smoking 173.3\n#| 4       27     No History of smoking 168.2"
+  },
+  {
+    "objectID": "session_2/session_2.html#exercise-1-1",
+    "href": "session_2/session_2.html#exercise-1-1",
+    "title": "Session 2: dplyr",
+    "section": "Exercise 1",
+    "text": "Exercise 1\n\nUse piping with filter() to subset the data to individuals with a history of smoking (smoking). Hint: first use table() or unique() to see the unique values of smoking.\nUse piping with filter() to subset the data to individuals who are 25 years of age or younger."
+  },
+  {
+    "objectID": "session_2/session_2.html#exercise-1-2",
+    "href": "session_2/session_2.html#exercise-1-2",
+    "title": "Session 2: dplyr",
+    "section": "Exercise 1",
+    "text": "Exercise 1\n\nAdd code to the top of the script for loading ggplot2.\nUse piping with filter() and ggplot() to make a scatterplot with diastolic blood pressure (bpxodi1) on the x axis and systolic blood pressure (bpxosy1) on the y axis, subsetting to individuals who are 65 years of age (ridageyr) or older and not missing a measurement of systolic blood pressure. Hint: you can use is.na()."
+  },
+  {
+    "objectID": "session_2/session_2.html#select",
+    "href": "session_2/session_2.html#select",
+    "title": "Session 2: dplyr",
+    "section": "select()",
+    "text": "select()\n\nto select just the asthma variable:\n\n\nminidata |&gt; select(asthma)\n#|              asthma\n#| 1                No\n#| 2                No\n#| 3                No\n#| 4                No\n#| 5 History of asthma\n#| 6                No\n#| 7                No\n#| 8                No"
+  },
+  {
+    "objectID": "session_2/session_2.html#select-1",
+    "href": "session_2/session_2.html#select-1",
+    "title": "Session 2: dplyr",
+    "section": "select()",
+    "text": "select()\n\nto select just the asthma and smoking variables:\n\n\nminidata |&gt; select(c(asthma, smoking))\n#|              asthma            smoking\n#| 1                No History of smoking\n#| 2                No History of smoking\n#| 3                No                 No\n#| 4                No                 No\n#| 5 History of asthma                 No\n#| 6                No History of smoking\n#| 7                No                 No\n#| 8                No History of smoking\n\n\nnotice the use of c() to list the variables"
+  },
+  {
+    "objectID": "session_2/session_2.html#select-2",
+    "href": "session_2/session_2.html#select-2",
+    "title": "Session 2: dplyr",
+    "section": "select()",
+    "text": "select()\n\nto drop the asthma variable:\n\n\nminidata &lt;- minidata |&gt; select(!asthma)\n\n\nnotice the exclamation point"
+  },
+  {
+    "objectID": "session_2/session_2.html#select-3",
+    "href": "session_2/session_2.html#select-3",
+    "title": "Session 2: dplyr",
+    "section": "select()",
+    "text": "select()\n\nminidata now looks like this:\n\n\nminidata |&gt; head()\n#|   ridageyr            smoking bmxht\n#| 1       43 History of smoking 179.5\n#| 2       66 History of smoking 174.2\n#| 3       44                 No 152.9\n#| 4       43                 No    NA\n#| 5       65                 No    NA\n#| 6       34 History of smoking 173.3"
+  },
+  {
+    "objectID": "session_2/session_2.html#select-4",
+    "href": "session_2/session_2.html#select-4",
+    "title": "Session 2: dplyr",
+    "section": "select()",
+    "text": "select()\n\nto drop the ridageyr and smoking variables:\n\n\nminidata &lt;- minidata |&gt; select(!c(ridageyr, smoking))\n\n\nnotice the exclamation point\nnotice the use of c() to list variables"
+  },
+  {
+    "objectID": "session_2/session_2.html#select-5",
+    "href": "session_2/session_2.html#select-5",
+    "title": "Session 2: dplyr",
+    "section": "select()",
+    "text": "select()\n\nminidata now looks like this:\n\n\nminidata |&gt; head()\n#|   bmxht\n#| 1 179.5\n#| 2 174.2\n#| 3 152.9\n#| 4    NA\n#| 5    NA\n#| 6 173.3"
+  },
+  {
+    "objectID": "session_2/session_2.html#exercise-2-1",
+    "href": "session_2/session_2.html#exercise-2-1",
+    "title": "Session 2: dplyr",
+    "section": "Exercise 2",
+    "text": "Exercise 2\n\nUse piping with filter() to select just the ridageyr, country, and smoking variables.\nUse piping with filter() to obtain a version of the data without the smoking variable. You do not need to replace the original data.\nUse piping with filter() to obtain a version of the data without the country and smoking variables. You do not need to replace the original data."
+  },
+  {
+    "objectID": "session_2/session_2.html#mutate",
+    "href": "session_2/session_2.html#mutate",
+    "title": "Session 2: dplyr",
+    "section": "mutate()",
+    "text": "mutate()\n\nto convert bmxht to inches:\n\n\nminidata &lt;- minidata |&gt;\n  mutate(height = bmxht * 0.3937008)\n\n\nminidata now looks like this:\n\n\nminidata |&gt; slice_head(n = 5)\n#|   bmxht   height\n#| 1 179.5 70.66929\n#| 2 174.2 68.58268\n#| 3 152.9 60.19685\n#| 4    NA       NA\n#| 5    NA       NA"
+  },
+  {
+    "objectID": "session_2/session_2.html#defining-missing-values",
+    "href": "session_2/session_2.html#defining-missing-values",
+    "title": "Session 2: dplyr",
+    "section": "Defining missing values",
+    "text": "Defining missing values\n\nthe replace() strategy for defining missing values from Session 6 of A Slower Introduction to R can be combined with mutate() and piping:\n\n\nnhanes &lt;- nhanes |&gt; \n  mutate(ltpa_vigorous = replace(pad820, pad820 == 7777 | pad820 == 9999, NA))"
+  },
+  {
+    "objectID": "session_2/session_2.html#defining-missing-values-1",
+    "href": "session_2/session_2.html#defining-missing-values-1",
+    "title": "Session 2: dplyr",
+    "section": "Defining missing values",
+    "text": "Defining missing values\n\nverifying that ltpa_vigorous is NA when pad820 is 7777 or 9999:\n\n\nnhanes |&gt;\n  select(pad820, ltpa_vigorous) |&gt;\n  filter(pad820 == 7777 | pad820 == 9999) |&gt;\n  slice_head(n = 5)\n#|   pad820 ltpa_vigorous\n#| 1   9999            NA\n#| 2   9999            NA\n#| 3   9999            NA\n#| 4   9999            NA\n#| 5   9999            NA"
+  },
+  {
+    "objectID": "session_2/session_2.html#defining-categorical-variables",
+    "href": "session_2/session_2.html#defining-categorical-variables",
+    "title": "Session 2: dplyr",
+    "section": "Defining categorical variables",
+    "text": "Defining categorical variables\n\nall of the strategies from Session 7 of A Slower Introduction to R can be combined with mutate() and piping"
+  },
+  {
+    "objectID": "session_2/session_2.html#labeling-categorical-variables",
+    "href": "session_2/session_2.html#labeling-categorical-variables",
+    "title": "Session 2: dplyr",
+    "section": "Labeling categorical variables",
+    "text": "Labeling categorical variables\n\nusing factor():\n\n\nnhanes &lt;- nhanes |&gt;\n  mutate(country = factor(\n    dmdborn4,\n    levels = c(1, 2),\n    labels = c('USA', 'Other')\n  ))\n\n\nor, using base_match() from my baseverse package:\n\n\nnhanes &lt;- nhanes |&gt;\n  mutate(country = base_match(dmdborn4, 'USA' = 1, 'Other' = 2))"
+  },
+  {
+    "objectID": "session_2/session_2.html#labeling-categorical-variables-1",
+    "href": "session_2/session_2.html#labeling-categorical-variables-1",
+    "title": "Session 2: dplyr",
+    "section": "Labeling categorical variables",
+    "text": "Labeling categorical variables\n\ncountry looks like this:\n\n\nnhanes |&gt; count(country)\n#|   country    n\n#| 1     USA 6519\n#| 2   Other 1617\n#| 3    &lt;NA&gt;   17\n\n\nwhereas dmdborn4 looks like this:\n\n\nnhanes |&gt; count(dmdborn4)\n#|   dmdborn4    n\n#| 1        1 6519\n#| 2        2 1617\n#| 3       NA   17"
+  },
+  {
+    "objectID": "session_2/session_2.html#categorizing-continuous-variables",
+    "href": "session_2/session_2.html#categorizing-continuous-variables",
+    "title": "Session 2: dplyr",
+    "section": "Categorizing continuous variables",
+    "text": "Categorizing continuous variables\n\nusing cut():\n\n\nnhanes &lt;- nhanes |&gt;\n  mutate(cholesterol = cut(\n    lbxtc,\n    breaks = c(0, 200, 240, Inf),\n    labels = c('Desirable', 'Borderline high', 'High'),\n    right = FALSE\n  ))"
+  },
+  {
+    "objectID": "session_2/session_2.html#categorizing-continuous-variables-1",
+    "href": "session_2/session_2.html#categorizing-continuous-variables-1",
+    "title": "Session 2: dplyr",
+    "section": "Categorizing continuous variables",
+    "text": "Categorizing continuous variables\n\nor, using base_when() from my baseverse package:\n\n\nnhanes &lt;- nhanes |&gt;\n  mutate(cholesterol = base_when(\n    'Desirable' = (lbxtc &lt; 200),\n    'Borderline high' = (lbxtc &gt;= 200) & (lbxtc &lt; 240),\n    'High' = (lbxtc &gt;= 240)\n  ))"
+  },
+  {
+    "objectID": "session_2/session_2.html#categorizing-continuous-variables-2",
+    "href": "session_2/session_2.html#categorizing-continuous-variables-2",
+    "title": "Session 2: dplyr",
+    "section": "Categorizing continuous variables",
+    "text": "Categorizing continuous variables\n\ncholesterol looks like this:\n\n\nnhanes |&gt; count(cholesterol)\n#|       cholesterol    n\n#| 1       Desirable 3695\n#| 2 Borderline high 1397\n#| 3            High  625\n#| 4            &lt;NA&gt; 2436"
+  },
+  {
+    "objectID": "session_2/session_2.html#exercise-4-1",
+    "href": "session_2/session_2.html#exercise-4-1",
+    "title": "Session 2: dplyr",
+    "section": "Exercise 4",
+    "text": "Exercise 4\n\nUse piping and mutate() to define a new variable for weight (bmxwt) in pounds. Hint: bmxwt is in kilograms and there are 2.204623 pounds in 1 kilgoram.\nUse piping, mutate(), and factor() to define a new variable called sex. This should be a labelled version of the original gender variable (riagendr). Values of 1 are used for males and values of 0 are used for females. Not:, this should end up matching the existing gender variable."
+  },
+  {
+    "objectID": "session_2/session_2.html#comparison",
+    "href": "session_2/session_2.html#comparison",
+    "title": "Session 2: dplyr",
+    "section": "Comparison",
+    "text": "Comparison\n\na summary of key dplyr functions and their base-R equivalents:\n\n\n\n\nbase R\nbaseverse\ndplyr\n\n\n\n\nsubset()\n\nfilter()\n\n\nsubset(select=)\nkeep()\nselect()\n\n\ntransform()\n\nmutate()"
+  },
+  {
+    "objectID": "session_2/session_2.html#comparison-1",
+    "href": "session_2/session_2.html#comparison-1",
+    "title": "Session 2: dplyr",
+    "section": "Comparison",
+    "text": "Comparison\n\nmany key functions in dplyr reproduce base-R functions\nthat being said, the dplyr equivalents may be faster or offer other improvements\ndplyr and tidyverse overall also offer numerous other functions that some find useful or convenient"
+  },
+  {
+    "objectID": "session_2/session_2.html#comparison-2",
+    "href": "session_2/session_2.html#comparison-2",
+    "title": "Session 2: dplyr",
+    "section": "Comparison",
+    "text": "Comparison\n\nfor example, starts_with() can be used in select() to pick variables beginning with a pattern:\n\n\nnhanes |&gt; select(starts_with('bpxosy'))\n\n\na base-R approach would be:\n\n\nnhanes |&gt; subset(select=grep('^bpxosy',names(nhanes)))\n\n\nthis uses grep(), a powerful base-R function for searching for text strings"
+  },
+  {
+    "objectID": "session_2/session_2.html#should-i-use-dplyr-and-tidyverse-1",
+    "href": "session_2/session_2.html#should-i-use-dplyr-and-tidyverse-1",
+    "title": "Session 2: dplyr",
+    "section": "Should I use dplyr and tidyverse?",
+    "text": "Should I use dplyr and tidyverse?\n\nit’s up to you!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Wrangling in R",
+    "section": "",
+    "text": "This is a 5-session workshop series on data wrangling in R. This series assumes prior experience with R, such as via the A Slower Introduction to R.\n\n\n\nAfter attending this workshop series, participants should be able to:\ncoming\n\n\n\nThe instructor has more than 10 years of experience teaching R at UCSF in various settings, including:\n\nas an instructor for Biostat 213\nas a co-instructor for GHS 207\n\nSince 2024, he has been a member of UCSF Library’s Data Science and Open Scholarship team (DSOS). Other workshops offered by DSOS are listed here.\n\n\n\nLive online sessions of this workshop series occur every Winter quarter. Registration links for Winter 2026 will be provided below, within each section."
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Data Wrangling in R",
+    "section": "",
+    "text": "This is a 5-session workshop series on data wrangling in R. This series assumes prior experience with R, such as via the A Slower Introduction to R.\n\n\n\nAfter attending this workshop series, participants should be able to:\ncoming\n\n\n\nThe instructor has more than 10 years of experience teaching R at UCSF in various settings, including:\n\nas an instructor for Biostat 213\nas a co-instructor for GHS 207\n\nSince 2024, he has been a member of UCSF Library’s Data Science and Open Scholarship team (DSOS). Other workshops offered by DSOS are listed here.\n\n\n\nLive online sessions of this workshop series occur every Winter quarter. Registration links for Winter 2026 will be provided below, within each section."
+  },
+  {
+    "objectID": "index.html#session-1-piping",
+    "href": "index.html#session-1-piping",
+    "title": "Data Wrangling in R",
+    "section": "Session 1: Piping",
+    "text": "Session 1: Piping\n\nslides (opens in a new tab)"
+  },
+  {
+    "objectID": "index.html#session-2-dplyr",
+    "href": "index.html#session-2-dplyr",
+    "title": "Data Wrangling in R",
+    "section": "Session 2: dplyr",
+    "text": "Session 2: dplyr\n\nslides (opens in a new tab)"
+  },
+  {
+    "objectID": "index.html#session-3-merging-and-reshaping-data",
+    "href": "index.html#session-3-merging-and-reshaping-data",
+    "title": "Data Wrangling in R",
+    "section": "Session 3: Merging and reshaping data",
+    "text": "Session 3: Merging and reshaping data\ncoming"
+  },
+  {
     "objectID": "session_1/session_1.html#example-sqrt",
     "href": "session_1/session_1.html#example-sqrt",
     "title": "Session 1: Piping",
@@ -25,7 +340,7 @@
     "href": "session_1/session_1.html#setup-for-some-coming-examples",
     "title": "Session 1: Piping",
     "section": "Setup for some coming examples",
-    "text": "Setup for some coming examples\n\nload some packages:\n\n\nlibrary(ggplot2) # for ggplot()\nlibrary(baseverse) # for base_when()\n\n\nimport the NHANES data:\n\n\nnhanes &lt;- read.csv('nhanes_l.csv')"
+    "text": "Setup for some coming examples\n\n\n\n\n\n\nTip\n\n\nPlease focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.\n\n\n\n\nload some packages:\n\n\nlibrary(ggplot2) # for ggplot()\nlibrary(baseverse) # for base_when()\n\n\nimport the NHANES data:\n\n\nnhanes &lt;- read.csv('nhanes_l.csv')"
   },
   {
     "objectID": "session_1/session_1.html#example-a-ggplot-scatterplot",
@@ -102,7 +417,7 @@
     "href": "session_1/session_1.html#so-how-do-i-do-this",
     "title": "Session 1: Piping",
     "section": "So how do I do this?",
-    "text": "So how do I do this?\n\nin general, the pattern is: argument |&gt; function()\nmore precisely, because many functions have multiple possible arguments, the pattern is: first argument of the function |&gt; function()"
+    "text": "So how do I do this?\n\nin general, the pattern is: argument |&gt; function()\nmore precisely, the typical usage is: first argument of the function |&gt; function()\n\n\n\nYou can actually use pipe the second or third (or greater) argument, but I won’t show you how to do that today."
   },
   {
     "objectID": "session_1/session_1.html#mean",
@@ -133,6 +448,27 @@
     "text": "Pipelines\n\na cooking analogy:\n\n\ncookie_dough |&gt;\n  chill(hours=24) |&gt;\n  scoop(ounces=1.75, quantity = 20) |&gt;\n  roll() |&gt;\n  bake(minutes=14)\n\n\neach pipe adds to the result up to that point\nfor example, the third line calls for scooping the chilled dough"
   },
   {
+    "objectID": "session_1/session_1.html#keep-writing-comments",
+    "href": "session_1/session_1.html#keep-writing-comments",
+    "title": "Session 1: Piping",
+    "section": "Keep writing comments",
+    "text": "Keep writing comments\n\nit is common practice to write long pipelines without any comments 😢\n\n\n\n\n\n\n\nTip\n\n\nKeep writing comments!"
+  },
+  {
+    "objectID": "session_1/session_1.html#keep-writing-comments-1",
+    "href": "session_1/session_1.html#keep-writing-comments-1",
+    "title": "Session 1: Piping",
+    "section": "Keep writing comments",
+    "text": "Keep writing comments\n\nI suggest writing short pipelines with comments, like this:\n\n\n# subset to people born outside of the us\nnhanes &lt;- nhanes |&gt; subset(country=='Other') \n\n# define age in months\nnhanes &lt;- nhanes |&gt; transform(months=ridageyr*12)\n\n# define height in feet\nnhanes &lt;- nhanes |&gt; transform(height_feet=bmxht*0.3937008/12)"
+  },
+  {
+    "objectID": "session_1/session_1.html#keep-writing-comments-2",
+    "href": "session_1/session_1.html#keep-writing-comments-2",
+    "title": "Session 1: Piping",
+    "section": "Keep writing comments",
+    "text": "Keep writing comments\n\nif you want to write long pipelines, I suggest writing comments within the pipeline, like this:\n\n\nnhanes &lt;- nhanes |&gt; \n  \n  # subset to people born outside of the us\n  subset(country=='Other') |&gt;\n  \n  # define age in months\n  transform(months=ridageyr*12) |&gt; \n\n  # define height in feet  \n  transform(height_feet=bmxht*0.3937008/12)"
+  },
+  {
     "objectID": "session_1/session_1.html#exercise-1-1",
     "href": "session_1/session_1.html#exercise-1-1",
     "title": "Session 1: Piping",
@@ -151,7 +487,7 @@
     "href": "session_1/session_1.html#setup-for-some-coming-examples-1",
     "title": "Session 1: Piping",
     "section": "Setup for some coming examples",
-    "text": "Setup for some coming examples\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes[1:8, c('ridageyr', 'asthma', 'smoking', 'bmxht')]\n\n\n\nThis code uses bracket notation, which I won’t be covering in this workshop series."
+    "text": "Setup for some coming examples\n\n\n\n\n\n\nTip\n\n\nPlease focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.\n\n\n\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes[1:8, c('ridageyr', 'asthma', 'smoking', 'bmxht')]\n\n\n\nThis code uses bracket notation, which I won’t be covering in this workshop series."
   },
   {
     "objectID": "session_1/session_1.html#setup-for-some-coming-examples-2",
@@ -179,7 +515,7 @@
     "href": "session_1/session_1.html#exercise-2-1",
     "title": "Session 1: Piping",
     "section": "Exercise 2",
-    "text": "Exercise 2\n\nUse piping to subset the data to individuals with a history of smoking (smoking). Hint: first use table() or unique() to see the unique values of smoking.\nUse piping with subset() to subset the data to individuals who are 25 years of age or younger."
+    "text": "Exercise 2\n\nUse piping with subset() to subset the data to individuals with a history of smoking (smoking). Hint: first use table() or unique() to see the unique values of smoking.\nUse piping with subset() to subset the data to individuals who are 25 years of age or younger."
   },
   {
     "objectID": "session_1/session_1.html#exercise-2-2",
@@ -193,46 +529,53 @@
     "href": "session_1/session_1.html#subsets-select",
     "title": "Session 1: Piping",
     "section": "subset()’s select",
-    "text": "subset()’s select\n\nto select just the asthma and smoking variables:\n\n\nsubset(minidata, select = c(asthma, smoking))\n#|              asthma            smoking\n#| 1                No History of smoking\n#| 2                No History of smoking\n#| 3                No                 No\n#| 4                No                 No\n#| 5 History of asthma                 No\n#| 6                No History of smoking\n#| 7                No                 No\n#| 8                No History of smoking"
+    "text": "subset()’s select\n\nto select just the asthma variable:\n\n\nsubset(minidata, select = asthma)\n#|              asthma\n#| 1                No\n#| 2                No\n#| 3                No\n#| 4                No\n#| 5 History of asthma\n#| 6                No\n#| 7                No\n#| 8                No"
   },
   {
     "objectID": "session_1/session_1.html#subsets-select-with-piping",
     "href": "session_1/session_1.html#subsets-select-with-piping",
     "title": "Session 1: Piping",
     "section": "subset()’s select with piping",
-    "text": "subset()’s select with piping\n\nwith piping:\n\n\nminidata |&gt; subset(select = c(asthma, smoking))\n#|              asthma            smoking\n#| 1                No History of smoking\n#| 2                No History of smoking\n#| 3                No                 No\n#| 4                No                 No\n#| 5 History of asthma                 No\n#| 6                No History of smoking\n#| 7                No                 No\n#| 8                No History of smoking"
-  },
-  {
-    "objectID": "session_1/session_1.html#subsets-select-1",
-    "href": "session_1/session_1.html#subsets-select-1",
-    "title": "Session 1: Piping",
-    "section": "subset()’s select",
-    "text": "subset()’s select\n\nto drop the ridageyr variable:\n\n\nsubset(minidata, select = -ridageyr)\n#|              asthma            smoking bmxht\n#| 1                No History of smoking 179.5\n#| 2                No History of smoking 174.2\n#| 3                No                 No 152.9\n#| 4                No                 No    NA\n#| 5 History of asthma                 No    NA\n#| 6                No History of smoking 173.3\n#| 7                No                 No 155.9\n#| 8                No History of smoking 168.2\n\n\nnotice the minus sign"
-  },
-  {
-    "objectID": "session_1/session_1.html#dropping-variables-1",
-    "href": "session_1/session_1.html#dropping-variables-1",
-    "title": "Session 1: Piping",
-    "section": "Dropping variables",
-    "text": "Dropping variables\n\nsubset(minidata, select = -ridageyr)\n\n\nthis simply returns a version of the data without the ridageyr variable\nminidata remains untouched\nto truly drop a variable, use object assignment to replace minidata:\n\n\nminidata &lt;- subset(minidata, select = -asthma)"
+    "text": "subset()’s select with piping\n\nwith piping:\n\n\nminidata |&gt; subset(select = asthma)\n#|              asthma\n#| 1                No\n#| 2                No\n#| 3                No\n#| 4                No\n#| 5 History of asthma\n#| 6                No\n#| 7                No\n#| 8                No"
   },
   {
     "objectID": "session_1/session_1.html#subsets-select-with-piping-1",
     "href": "session_1/session_1.html#subsets-select-with-piping-1",
     "title": "Session 1: Piping",
     "section": "subset()’s select with piping",
-    "text": "subset()’s select with piping\n\nwith piping:\n\n\nminidata &lt;- minidata |&gt; subset(select = -asthma)\n\n\nminidata now looks like this:\n\n\nminidata |&gt; head()\n#|   ridageyr            smoking bmxht\n#| 1       43 History of smoking 179.5\n#| 2       66 History of smoking 174.2\n#| 3       44                 No 152.9\n#| 4       43                 No    NA\n#| 5       65                 No    NA\n#| 6       34 History of smoking 173.3"
+    "text": "subset()’s select with piping\n\nto select just the asthma and smoking variables:\n\n\nminidata |&gt; subset(select = c(asthma, smoking))\n#|              asthma            smoking\n#| 1                No History of smoking\n#| 2                No History of smoking\n#| 3                No                 No\n#| 4                No                 No\n#| 5 History of asthma                 No\n#| 6                No History of smoking\n#| 7                No                 No\n#| 8                No History of smoking\n\n\nnotice the use of c() to list the variables"
+  },
+  {
+    "objectID": "session_1/session_1.html#subsets-select-1",
+    "href": "session_1/session_1.html#subsets-select-1",
+    "title": "Session 1: Piping",
+    "section": "subset()’s select",
+    "text": "subset()’s select\n\nto drop the asthma variable:\n\n\nsubset(minidata, select = -asthma)\n#|   ridageyr            smoking bmxht\n#| 1       43 History of smoking 179.5\n#| 2       66 History of smoking 174.2\n#| 3       44                 No 152.9\n#| 4       43                 No    NA\n#| 5       65                 No    NA\n#| 6       34 History of smoking 173.3\n#| 7       68                 No 155.9\n#| 8       27 History of smoking 168.2\n\n\nnotice the minus sign"
+  },
+  {
+    "objectID": "session_1/session_1.html#subsets-select-2",
+    "href": "session_1/session_1.html#subsets-select-2",
+    "title": "Session 1: Piping",
+    "section": "subset()’s select",
+    "text": "subset()’s select\n\nsubset(minidata, select = -asthma)\n\n\nthis simply returns a version of the data without the asthma variable\nminidata remains untouched\nto truly drop a variable, use object assignment to replace minidata:\n\n\nminidata &lt;- subset(minidata, select = -asthma)"
   },
   {
     "objectID": "session_1/session_1.html#subsets-select-with-piping-2",
     "href": "session_1/session_1.html#subsets-select-with-piping-2",
     "title": "Session 1: Piping",
     "section": "subset()’s select with piping",
-    "text": "subset()’s select with piping\n\nto drop the ridageyr and smoking variables with piping:\n\n\nminidata &lt;- minidata |&gt; subset(select = -c(ridageyr, smoking))\n\n\nnotice the minus sign and c()"
+    "text": "subset()’s select with piping\n\nwith piping:\n\n\nminidata &lt;- minidata |&gt; subset(select = -asthma)\n\n\nminidata now looks like this:\n\n\nminidata |&gt; head()\n#|   ridageyr            smoking bmxht\n#| 1       43 History of smoking 179.5\n#| 2       66 History of smoking 174.2\n#| 3       44                 No 152.9\n#| 4       43                 No    NA\n#| 5       65                 No    NA\n#| 6       34 History of smoking 173.3"
   },
   {
     "objectID": "session_1/session_1.html#subsets-select-with-piping-3",
     "href": "session_1/session_1.html#subsets-select-with-piping-3",
+    "title": "Session 1: Piping",
+    "section": "subset()’s select with piping",
+    "text": "subset()’s select with piping\n\nto drop the ridageyr and smoking variables with piping:\n\n\nminidata &lt;- minidata |&gt; subset(select = -c(ridageyr, smoking))\n\n\nnotice the minus sign\nnotice the use of c() to list variables"
+  },
+  {
+    "objectID": "session_1/session_1.html#subsets-select-with-piping-4",
+    "href": "session_1/session_1.html#subsets-select-with-piping-4",
     "title": "Session 1: Piping",
     "section": "subset()’s select with piping",
     "text": "subset()’s select with piping\n\nminidata now looks like this:\n\n\nminidata |&gt; head()\n#|   bmxht\n#| 1 179.5\n#| 2 174.2\n#| 3 152.9\n#| 4    NA\n#| 5    NA\n#| 6 173.3"
@@ -355,40 +698,5 @@
     "title": "Session 1: Piping",
     "section": "Should I always use piping?",
     "text": "Should I always use piping?\n\nit’s up to you!\npiping can be fun and satisfying\nas we’ll discuss next week, tidyverse purists tend to try to pipe everything\nI am, in general, supportive of having options…"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Data Wrangling in R",
-    "section": "",
-    "text": "This is a 5-session workshop series on data wrangling in R. This series assumes prior experience with R, such as via the A Slower Introduction to R.\n\n\n\nAfter attending this workshop series, participants should be able to:\ncoming\n\n\n\nThe instructor has more than 10 years of experience teaching R at UCSF in various settings, including:\n\nas an instructor for Biostat 213\nas a co-instructor for GHS 207\n\nSince 2024, he has been a member of UCSF Library’s Data Science and Open Scholarship team (DSOS). Other workshops offered by DSOS are listed here.\n\n\n\nLive online sessions of this workshop series occur every Winter quarter. Registration links for Winter 2026 will be provided below, within each section."
-  },
-  {
-    "objectID": "index.html#overview",
-    "href": "index.html#overview",
-    "title": "Data Wrangling in R",
-    "section": "",
-    "text": "This is a 5-session workshop series on data wrangling in R. This series assumes prior experience with R, such as via the A Slower Introduction to R.\n\n\n\nAfter attending this workshop series, participants should be able to:\ncoming\n\n\n\nThe instructor has more than 10 years of experience teaching R at UCSF in various settings, including:\n\nas an instructor for Biostat 213\nas a co-instructor for GHS 207\n\nSince 2024, he has been a member of UCSF Library’s Data Science and Open Scholarship team (DSOS). Other workshops offered by DSOS are listed here.\n\n\n\nLive online sessions of this workshop series occur every Winter quarter. Registration links for Winter 2026 will be provided below, within each section."
-  },
-  {
-    "objectID": "index.html#session-1-piping",
-    "href": "index.html#session-1-piping",
-    "title": "Data Wrangling in R",
-    "section": "Session 1: Piping",
-    "text": "Session 1: Piping\n\nslides (opens in a new tab)"
-  },
-  {
-    "objectID": "index.html#session-2-dplyr",
-    "href": "index.html#session-2-dplyr",
-    "title": "Data Wrangling in R",
-    "section": "Session 2: dplyr",
-    "text": "Session 2: dplyr\ncoming"
-  },
-  {
-    "objectID": "index.html#session-3-merging-and-reshaping-data",
-    "href": "index.html#session-3-merging-and-reshaping-data",
-    "title": "Data Wrangling in R",
-    "section": "Session 3: Merging and reshaping data",
-    "text": "Session 3: Merging and reshaping data\ncoming"
   }
 ]
