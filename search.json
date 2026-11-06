@@ -32,7 +32,7 @@
     "href": "session_2/session_2.html#setup-for-some-coming-examples-1",
     "title": "Session 2: dplyr",
     "section": "Setup for some coming examples",
-    "text": "Setup for some coming examples\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes |&gt;\n  slice(1:7) |&gt;\n  select(seqn, ridageyr, bpxosy1, bpxodi1)"
+    "text": "Setup for some coming examples\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes |&gt;\n  select(seqn, ridageyr, bpxosy1, bpxodi1) |&gt;\n  slice(1:7)"
   },
   {
     "objectID": "session_2/session_2.html#piping-everything",
@@ -77,13 +77,6 @@
     "text": "Insisting on two-dimensional output\n\ntidyverse users would do this instead:\n\n\nminidata |&gt; summarize(mean = mean(bpxosy1, na.rm = TRUE))\n#|   mean\n#| 1  124\n\n\nthe result is a data frame, not a single number:\n\n\nminidata |&gt; \n  summarize(mean(bpxosy1, na.rm = TRUE)) |&gt;\n  class()\n#| [1] \"data.frame\""
   },
   {
-    "objectID": "session_2/session_2.html#why-should-i-use-dplyr",
-    "href": "session_2/session_2.html#why-should-i-use-dplyr",
-    "title": "Session 2: dplyr",
-    "section": "Why should I use dplyr?",
-    "text": "Why should I use dplyr?\n\ndplyr and the tidyverse are enormously popular\ndplyr also includes functions and approaches that people argue to be easier to understand or easier to read than base-R equivalents\nin some cases, dplyr or tidyverse functions can be faster than base-R equivalents"
-  },
-  {
     "objectID": "session_2/session_2.html#why-should-i-not-use-dplyr",
     "href": "session_2/session_2.html#why-should-i-not-use-dplyr",
     "title": "Session 2: dplyr",
@@ -91,18 +84,25 @@
     "text": "Why should I not use dplyr?\n\nmy opinion: dplyr and tidyverse are bloated, with a lot of functions overall, including functions that reproduce base-R functions or features\nmy opinion: the tidyverse approach is too strict\nmy opinion: the introduction of piping to base R makes dplyr and tidyverse feel even more redundant"
   },
   {
+    "objectID": "session_2/session_2.html#why-should-i-use-dplyr",
+    "href": "session_2/session_2.html#why-should-i-use-dplyr",
+    "title": "Session 2: dplyr",
+    "section": "Why should I use dplyr?",
+    "text": "Why should I use dplyr?\n\ndplyr and the tidyverse are enormously popular\ndplyr also includes functions and approaches that people argue to be easier to understand or easier to read than base-R equivalents\nin some cases, dplyr or tidyverse functions can be faster than base-R equivalents"
+  },
+  {
     "objectID": "session_2/session_2.html#why-should-i-learn-dplyr",
     "href": "session_2/session_2.html#why-should-i-learn-dplyr",
     "title": "Session 2: dplyr",
     "section": "Why should I learn dplyr?",
-    "text": "Why should I learn dplyr?\n\nit’s good to understand at least a little bit of dplyr—even if you don’t plan on using it—because it’s so popular"
+    "text": "Why should I learn dplyr?\n\nputting aside a base R versus tidyverse argument for now…\nit’s good to understand at least a little bit of dplyr—even if you don’t plan on using it—because it’s so popular"
   },
   {
     "objectID": "session_2/session_2.html#setup-for-some-coming-examples-2",
     "href": "session_2/session_2.html#setup-for-some-coming-examples-2",
     "title": "Session 2: dplyr",
     "section": "Setup for some coming examples",
-    "text": "Setup for some coming examples\n\n\n\n\n\n\nTip\n\n\nPlease focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.\n\n\n\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes |&gt;\n  slice(1:8) |&gt;\n  select(ridageyr, asthma, smoking, bmxht)"
+    "text": "Setup for some coming examples\n\n\n\n\n\n\nTip\n\n\nPlease focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.\n\n\n\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes |&gt;\n  select(ridageyr, asthma, smoking, bmxht) |&gt;\n  slice(1:8)"
   },
   {
     "objectID": "session_2/session_2.html#setup-for-some-coming-examples-3",

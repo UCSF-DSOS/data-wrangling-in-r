@@ -271,8 +271,8 @@ Yea-Hung Chen, PhD, MS
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(seqn, ridageyr, bpxosy1, bpxodi1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(seqn, ridageyr, bpxosy1, bpxodi1) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="piping-everything" class="slide level2">
@@ -369,14 +369,6 @@ Yea-Hung Chen, PhD, MS
 <span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| [1] "data.frame"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="why-should-i-use-dplyr" class="slide level2">
-<h2>Why should I use <code>dplyr</code>?</h2>
-<ul>
-<li><code>dplyr</code> and the tidyverse are <strong>enormously popular</strong></li>
-<li><code>dplyr</code> also includes functions and approaches that people argue to be <strong>easier to understand</strong> or easier to read than base-R equivalents</li>
-<li>in some cases, <code>dplyr</code> or tidyverse functions can be <strong>faster</strong> than base-R equivalents</li>
-</ul>
-</section>
 <section id="why-should-i-not-use-dplyr" class="slide level2">
 <h2>Why should I not use <code>dplyr</code>?</h2>
 <ul>
@@ -385,9 +377,18 @@ Yea-Hung Chen, PhD, MS
 <li>my opinion: the introduction of piping to base R makes <code>dplyr</code> and tidyverse feel even more <strong>redundant</strong></li>
 </ul>
 </section>
+<section id="why-should-i-use-dplyr" class="slide level2">
+<h2>Why should I use <code>dplyr</code>?</h2>
+<ul>
+<li><code>dplyr</code> and the tidyverse are <strong>enormously popular</strong></li>
+<li><code>dplyr</code> also includes functions and approaches that people argue to be <strong>easier to understand</strong> or easier to read than base-R equivalents</li>
+<li>in some cases, <code>dplyr</code> or tidyverse functions can be <strong>faster</strong> than base-R equivalents</li>
+</ul>
+</section>
 <section id="why-should-i-learn-dplyr" class="slide level2">
 <h2>Why should I learn <code>dplyr</code>?</h2>
 <ul>
+<li>putting aside a base R versus tidyverse argument for now…</li>
 <li>it’s good to understand at least a little bit of <code>dplyr</code>—even if you don’t plan on using it—because <strong>it’s so popular</strong></li>
 </ul>
 </section></section>
@@ -416,8 +417,8 @@ Yea-Hung Chen, PhD, MS
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ridageyr, asthma, smoking, bmxht)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ridageyr, asthma, smoking, bmxht) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="setup-for-some-coming-examples-3" class="slide level2">
