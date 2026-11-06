@@ -394,17 +394,16 @@ Yea-Hung Chen, PhD, MS
 <section id="what-does-this-have-to-do-with-data-wrangling" class="slide level2">
 <h2>What does this have to do with data wrangling?</h2>
 <ul>
-<li>fair question!</li>
-<li>piping can be used for data analysis</li>
-<li>but, it can also be used for data wrangling, as with this earlier example:</li>
+<li>great question!</li>
+<li>piping can definitely be used for data analysis</li>
+<li>so, <strong>piping is not inherently for data wrangling</strong></li>
+<li>but, <strong>using piping for data wrangling can be very useful</strong>, as with this earlier example:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">cholesterol =</span> <span class="fu">base_when</span>(</span>
-<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'Desirable'</span> <span class="ot">=</span> (lbxtc <span class="sc">&lt;</span> <span class="dv">200</span>),</span>
-<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'Borderline high'</span> <span class="ot">=</span> (lbxtc <span class="sc">&gt;=</span> <span class="dv">200</span>) <span class="sc">&amp;</span> (lbxtc <span class="sc">&lt;</span> <span class="dv">240</span>),</span>
-<span id="cb12-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="st">'High'</span> <span class="ot">=</span> (lbxtc <span class="sc">&gt;=</span> <span class="dv">240</span>)</span>
-<span id="cb12-6"><a aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(smoking <span class="sc">==</span> <span class="st">'History of smoking'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(<span class="st">'hypertension'</span>, <span class="st">'smoking'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="havent-i-seen-something-like-this-somewhere-else" class="slide level2">
@@ -433,7 +432,7 @@ Yea-Hung Chen, PhD, MS
 </ul>
 
 <aside><div>
-<p>You can actually use pipe the second or third (or greater) argument, but I won’t show you how to do that today.</p>
+<p>You can actually pipe to an argument that is not the first argument. I’ll show you how to do this at the end of this section.</p>
 </div></aside></section>
 <section id="mean" class="slide level2">
 <h2><code>mean()</code></h2>
@@ -569,22 +568,18 @@ Yea-Hung Chen, PhD, MS
 <section id="what-if-i-want-to-pipe-to-a-different-argument" class="slide level2">
 <h2>What if I want to pipe to a different argument?</h2>
 <ul>
-<li>use <code>_</code>, which acts as placeholder:</li>
+<li>use <strong><code>_</code></strong>:</li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(bpxosy1 <span class="sc">~</span> smoking, <span class="at">data =</span> _)</span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(bpxosy1 <span class="sc">~</span> smoking, <span class="at">data =</span> _)</span>
 <span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|  Welch Two Sample t-test</span></span>
-<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| data:  bpxosy1 by smoking</span></span>
-<span id="cb22-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| t = 7.4317, df = 4887.9, p-value = 1.258e-13</span></span>
-<span id="cb22-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| alternative hypothesis: true difference in means between group History of smoking and group No is not equal to 0</span></span>
-<span id="cb22-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| 95 percent confidence interval:</span></span>
-<span id="cb22-10"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|  2.672803 4.588225</span></span>
-<span id="cb22-11"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| sample estimates:</span></span>
-<span id="cb22-12"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| mean in group History of smoking                 mean in group No </span></span>
-<span id="cb22-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|                         124.7512                         121.1207</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| Call:</span></span>
+<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| lm(formula = bpxosy1 ~ smoking, data = nhanes)</span></span>
+<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb22-7"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| Coefficients:</span></span>
+<span id="cb22-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| (Intercept)    smokingNo  </span></span>
+<span id="cb22-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#|     124.751       -3.631</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>when you use <code>_</code>, you <strong>must include the argument name</strong></li>

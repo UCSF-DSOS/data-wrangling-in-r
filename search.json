@@ -410,7 +410,7 @@
     "href": "session_1/session_1.html#what-does-this-have-to-do-with-data-wrangling",
     "title": "Session 1: Piping",
     "section": "What does this have to do with data wrangling?",
-    "text": "What does this have to do with data wrangling?\n\nfair question!\npiping can be used for data analysis\nbut, it can also be used for data wrangling, as with this earlier example:\n\n\nnhanes &lt;- nhanes |&gt;\n  transform(cholesterol = base_when(\n    'Desirable' = (lbxtc &lt; 200),\n    'Borderline high' = (lbxtc &gt;= 200) & (lbxtc &lt; 240),\n    'High' = (lbxtc &gt;= 240)\n  ))"
+    "text": "What does this have to do with data wrangling?\n\ngreat question!\npiping can definitely be used for data analysis\nso, piping is not inherently for data wrangling\nbut, using piping for data wrangling can be very useful, as with this earlier example:\n\n\nnhanes |&gt;\n  subset(smoking == 'History of smoking') |&gt;\n  subset(select = c('hypertension', 'smoking')) |&gt;\n  head()"
   },
   {
     "objectID": "session_1/session_1.html#havent-i-seen-something-like-this-somewhere-else",
@@ -431,7 +431,7 @@
     "href": "session_1/session_1.html#so-how-do-i-do-this",
     "title": "Session 1: Piping",
     "section": "So how do I do this?",
-    "text": "So how do I do this?\n\nin general, the pattern is: argument |&gt; function()\nmore precisely, the typical usage is: first argument of the function |&gt; function()\n\n\n\nYou can actually use pipe the second or third (or greater) argument, but I won’t show you how to do that today."
+    "text": "So how do I do this?\n\nin general, the pattern is: argument |&gt; function()\nmore precisely, the typical usage is: first argument of the function |&gt; function()\n\n\n\nYou can actually pipe to an argument that is not the first argument. I’ll show you how to do this at the end of this section."
   },
   {
     "objectID": "session_1/session_1.html#mean",
@@ -487,7 +487,7 @@
     "href": "session_1/session_1.html#what-if-i-want-to-pipe-to-a-different-argument",
     "title": "Session 1: Piping",
     "section": "What if I want to pipe to a different argument?",
-    "text": "What if I want to pipe to a different argument?\n\nuse _, which acts as placeholder:\n\n\nnhanes |&gt;\n  t.test(bpxosy1 ~ smoking, data = _)\n#| \n#|  Welch Two Sample t-test\n#| \n#| data:  bpxosy1 by smoking\n#| t = 7.4317, df = 4887.9, p-value = 1.258e-13\n#| alternative hypothesis: true difference in means between group History of smoking and group No is not equal to 0\n#| 95 percent confidence interval:\n#|  2.672803 4.588225\n#| sample estimates:\n#| mean in group History of smoking                 mean in group No \n#|                         124.7512                         121.1207\n\n\nwhen you use _, you must include the argument name\nyou can also only use _ once within a single function"
+    "text": "What if I want to pipe to a different argument?\n\nuse _:\n\n\nnhanes |&gt;\n  lm(bpxosy1 ~ smoking, data = _)\n#| \n#| Call:\n#| lm(formula = bpxosy1 ~ smoking, data = nhanes)\n#| \n#| Coefficients:\n#| (Intercept)    smokingNo  \n#|     124.751       -3.631\n\n\nwhen you use _, you must include the argument name\nyou can also only use _ once within a single function"
   },
   {
     "objectID": "session_1/session_1.html#exercise-1-1",
