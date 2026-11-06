@@ -508,7 +508,7 @@
     "href": "session_1/session_1.html#setup-for-some-coming-examples-1",
     "title": "Session 1: Piping",
     "section": "Setup for some coming examples",
-    "text": "Setup for some coming examples\n\n\n\n\n\n\nTip\n\n\nPlease focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.\n\n\n\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes[1:8, c('ridageyr', 'asthma', 'smoking', 'bmxht')]\n\n\n\nThis code uses bracket notation, which I won’t be covering in this workshop series."
+    "text": "Setup for some coming examples\n\n\n\n\n\n\nTip\n\n\nPlease focus on following along. I’m including the code for the setup in case you want to reproduce any of the examples on your own later.\n\n\n\n\ndefine a mini version of the NHANES data:\n\n\nminidata &lt;- nhanes |&gt;\n  subset(select = c(ridageyr, asthma, smoking, bmxht)) |&gt;\n  head(n = 8)"
   },
   {
     "objectID": "session_1/session_1.html#setup-for-some-coming-examples-2",

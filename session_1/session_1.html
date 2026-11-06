@@ -632,12 +632,11 @@ Yea-Hung Chen, PhD, MS
 <li>define a mini version of the NHANES data:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> nhanes[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="fu">c</span>(<span class="st">'ridageyr'</span>, <span class="st">'asthma'</span>, <span class="st">'smoking'</span>, <span class="st">'bmxht'</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> nhanes <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(ridageyr, asthma, smoking, bmxht)) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-
-<aside><div>
-<p>This code uses bracket notation, which I won’t be covering in this workshop series.</p>
-</div></aside></section>
+</section>
 <section id="setup-for-some-coming-examples-2" class="slide level2">
 <h2>Setup for some coming examples</h2>
 <ul>
