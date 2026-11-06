@@ -382,7 +382,7 @@
     "href": "session_1/session_1.html#example-a-data-snippet",
     "title": "Session 1: Piping",
     "section": "Example: a data snippet",
-    "text": "Example: a data snippet\n\nsuppose that I want to glance at the data for the subset of people with a history of smoking:\n\n\nhead(subset(\n  nhanes,\n  smoking == 'History of smoking',\n  select = c(hypertension, smoking)\n))\n\n\nthis is difficult to read because it nests a long use of subset() within head()"
+    "text": "Example: a data snippet\n\nsuppose that I want to glance at the data for the subset of people with a history of smoking:\n\n\nhead(subset(\n  nhanes,\n  smoking == 'History of smoking',\n  select = c(hypertension, smoking)\n))\n\n\nthis is difficult to read because it nests a long subset() call within head()"
   },
   {
     "objectID": "session_1/session_1.html#example-a-data-snippet-1",
@@ -396,7 +396,7 @@
     "href": "session_1/session_1.html#example-a-data-snippet-2",
     "title": "Session 1: Piping",
     "section": "Example: a data snippet",
-    "text": "Example: a data snippet\n\nI can split the use of subset() into two uses to make it even easier to read:\n\n\nnhanes |&gt;\n  subset(smoking == 'History of smoking') |&gt;\n  subset(select = c('hypertension', 'smoking')) |&gt;\n  head()"
+    "text": "Example: a data snippet\n\nI can split the subset() call into two calls to make it even easier to read:\n\n\nnhanes |&gt;\n  subset(smoking == 'History of smoking') |&gt;\n  subset(select = c('hypertension', 'smoking')) |&gt;\n  head()"
   },
   {
     "objectID": "session_1/session_1.html#in-summary",
@@ -404,6 +404,13 @@
     "title": "Session 1: Piping",
     "section": "In summary",
     "text": "In summary\n\nyou can use piping to avoid the data argument\nyou can use piping to avoid dollar-sign notation\nyou can use piping to avoid nested functions"
+  },
+  {
+    "objectID": "session_1/session_1.html#what-does-this-have-to-do-with-data-wrangling",
+    "href": "session_1/session_1.html#what-does-this-have-to-do-with-data-wrangling",
+    "title": "Session 1: Piping",
+    "section": "What does this have to do with data wrangling?",
+    "text": "What does this have to do with data wrangling?\n\nfair question!\npiping can be used for data analysis\nbut, it can also be used for data wrangling, as with this earlier example:\n\n\nnhanes &lt;- nhanes |&gt;\n  transform(cholesterol = base_when(\n    'Desirable' = (lbxtc &lt; 200),\n    'Borderline high' = (lbxtc &gt;= 200) & (lbxtc &lt; 240),\n    'High' = (lbxtc &gt;= 240)\n  ))"
   },
   {
     "objectID": "session_1/session_1.html#havent-i-seen-something-like-this-somewhere-else",
@@ -474,6 +481,13 @@
     "title": "Session 1: Piping",
     "section": "Keep writing comments",
     "text": "Keep writing comments\n\nif you want to write long pipelines, I suggest writing comments within the pipeline, like this:\n\n\nnhanes &lt;- nhanes |&gt; \n  \n  # subset to people born outside of the us\n  subset(country=='Other') |&gt;\n  \n  # define age in months\n  transform(months=ridageyr*12) |&gt; \n\n  # define height in feet  \n  transform(height_feet=bmxht*0.3937008/12)"
+  },
+  {
+    "objectID": "session_1/session_1.html#what-if-i-want-to-pipe-to-a-different-argument",
+    "href": "session_1/session_1.html#what-if-i-want-to-pipe-to-a-different-argument",
+    "title": "Session 1: Piping",
+    "section": "What if I want to pipe to a different argument?",
+    "text": "What if I want to pipe to a different argument?\n\nuse _, which acts as placeholder:\n\n\nnhanes |&gt;\n  t.test(bpxosy1 ~ smoking, data = _)\n#| \n#|  Welch Two Sample t-test\n#| \n#| data:  bpxosy1 by smoking\n#| t = 7.4317, df = 4887.9, p-value = 1.258e-13\n#| alternative hypothesis: true difference in means between group History of smoking and group No is not equal to 0\n#| 95 percent confidence interval:\n#|  2.672803 4.588225\n#| sample estimates:\n#| mean in group History of smoking                 mean in group No \n#|                         124.7512                         121.1207\n\n\nwhen you use _, you must include the argument name\nyou can also only use _ once within a single function"
   },
   {
     "objectID": "session_1/session_1.html#exercise-1-1",
