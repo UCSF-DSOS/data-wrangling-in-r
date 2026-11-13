@@ -77,18 +77,18 @@
     "text": "Insisting on two-dimensional output\n\ntidyverse users would do this instead:\n\n\nminidata |&gt; summarize(mean = mean(bpxosy1, na.rm = TRUE))\n#|   mean\n#| 1  124\n\n\nthe result is a data frame, not a single number:\n\n\nminidata |&gt; \n  summarize(mean(bpxosy1, na.rm = TRUE)) |&gt;\n  class()\n#| [1] \"data.frame\""
   },
   {
-    "objectID": "session_2/session_2.html#why-should-i-not-use-dplyr",
-    "href": "session_2/session_2.html#why-should-i-not-use-dplyr",
-    "title": "Session 2: dplyr",
-    "section": "Why should I not use dplyr?",
-    "text": "Why should I not use dplyr?\n\nmy opinion: dplyr and tidyverse are bloated, with a lot of functions overall, including functions that reproduce base-R functions or features\nmy opinion: the tidyverse approach is too strict\nmy opinion: the introduction of piping to base R makes dplyr and tidyverse feel even more redundant"
-  },
-  {
     "objectID": "session_2/session_2.html#why-should-i-use-dplyr",
     "href": "session_2/session_2.html#why-should-i-use-dplyr",
     "title": "Session 2: dplyr",
     "section": "Why should I use dplyr?",
     "text": "Why should I use dplyr?\n\ndplyr and the tidyverse are enormously popular\ndplyr also includes functions and approaches that people argue to be easier to understand or easier to read than base-R equivalents\nin some cases, dplyr or tidyverse functions can be faster than base-R equivalents"
+  },
+  {
+    "objectID": "session_2/session_2.html#why-should-i-not-use-dplyr",
+    "href": "session_2/session_2.html#why-should-i-not-use-dplyr",
+    "title": "Session 2: dplyr",
+    "section": "Why should I not use dplyr?",
+    "text": "Why should I not use dplyr?\n\nmy opinion: dplyr and tidyverse are bloated, with a lot of functions overall, including functions that reproduce base-R functions or features\nmy opinion: the tidyverse approach is too strict\nmy opinion: the introduction of piping to base R makes dplyr and tidyverse feel even more redundant"
   },
   {
     "objectID": "session_2/session_2.html#why-should-i-learn-dplyr",
@@ -252,32 +252,46 @@
     "text": "Exercise 4\n\nUse piping and mutate() to define a new variable for weight (bmxwt) in pounds. Hint: bmxwt is in kilograms and there are 2.204623 pounds in 1 kilgoram.\nUse piping, mutate(), and factor() to define a new variable called sex. This should be a labelled version of the original gender variable (riagendr). Values of 1 are used for males and values of 0 are used for females. Not:, this should end up matching the existing gender variable."
   },
   {
-    "objectID": "session_2/session_2.html#comparison",
-    "href": "session_2/session_2.html#comparison",
+    "objectID": "session_2/session_2.html#base-r-versus-dplyr-1",
+    "href": "session_2/session_2.html#base-r-versus-dplyr-1",
     "title": "Session 2: dplyr",
-    "section": "Comparison",
-    "text": "Comparison\n\na summary of key dplyr functions and their base-R equivalents:\n\n\n\n\nbase R\nbaseverse\ndplyr\n\n\n\n\nsubset()\n\nfilter()\n\n\nsubset(select=)\nkeep()\nselect()\n\n\ntransform()\n\nmutate()"
+    "section": "base R versus dplyr",
+    "text": "base R versus dplyr\n\na summary of key dplyr functions and their base-R equivalents:\n\n\n\n\nbase R\nbaseverse\ndplyr\n\n\n\n\nsubset()\n\nfilter()\n\n\nsubset(select=)\nkeep()\nselect()\n\n\ntransform()\n\nmutate()"
   },
   {
-    "objectID": "session_2/session_2.html#comparison-1",
-    "href": "session_2/session_2.html#comparison-1",
+    "objectID": "session_2/session_2.html#base-r-versus-dplyr-2",
+    "href": "session_2/session_2.html#base-r-versus-dplyr-2",
     "title": "Session 2: dplyr",
-    "section": "Comparison",
-    "text": "Comparison\n\nmany key functions in dplyr reproduce base-R functions\nthat being said, the dplyr equivalents may be faster or offer other improvements\ndplyr and tidyverse overall also offer numerous other functions that some find useful or convenient"
+    "section": "base R versus dplyr",
+    "text": "base R versus dplyr\n\nmany key functions in dplyr reproduce base-R functions\nthat being said, the dplyr equivalents may be faster or offer other improvements\ndplyr and tidyverse overall also offer numerous other functions that some find useful or convenient"
   },
   {
-    "objectID": "session_2/session_2.html#comparison-2",
-    "href": "session_2/session_2.html#comparison-2",
+    "objectID": "session_2/session_2.html#other-dplyr-functions",
+    "href": "session_2/session_2.html#other-dplyr-functions",
     "title": "Session 2: dplyr",
-    "section": "Comparison",
-    "text": "Comparison\n\nfor example, starts_with() can be used in select() to pick variables beginning with a pattern:\n\n\nnhanes |&gt; select(starts_with('bpxosy'))\n\n\na base-R approach would be:\n\n\nnhanes |&gt; subset(select=grep('^bpxosy',names(nhanes)))\n\n\nthis uses grep(), a powerful base-R function for searching for text strings"
+    "section": "Other dplyr functions",
+    "text": "Other dplyr functions\n\nfor example, we can dplyr’s starts_with() to pick variables beginning with a pattern:\n\n\nnhanes |&gt; select(starts_with('bpxosy'))\n\n\na base-R approach would be:\n\n\nnhanes |&gt; subset(select=grep('^bpxosy',names(nhanes)))\n\n\nthis uses grep(), a powerful base-R function for searching for text strings"
   },
   {
-    "objectID": "session_2/session_2.html#should-i-use-dplyr-and-tidyverse-1",
-    "href": "session_2/session_2.html#should-i-use-dplyr-and-tidyverse-1",
+    "objectID": "session_2/session_2.html#other-dplyr-functions-1",
+    "href": "session_2/session_2.html#other-dplyr-functions-1",
     "title": "Session 2: dplyr",
-    "section": "Should I use dplyr and tidyverse?",
-    "text": "Should I use dplyr and tidyverse?\n\nit’s up to you!"
+    "section": "Other dplyr functions",
+    "text": "Other dplyr functions\n\nor, for example, to make all the variable names lowercase, we could use dplyr’s rename_with():\n\n\nnhanes |&gt; rename_with(tolower)\n\n\na base-R approach would be:\n\n\nnhanes |&gt; setNames(tolower(names(nhanes)))\n\n\nor:\n\n\nnames(nhanes) &lt;- tolower(names(nhanes))"
+  },
+  {
+    "objectID": "session_2/session_2.html#base-r-versus-dplyr-3",
+    "href": "session_2/session_2.html#base-r-versus-dplyr-3",
+    "title": "Session 2: dplyr",
+    "section": "base R versus dplyr",
+    "text": "base R versus dplyr\n\nan overall philosophical difference is:\n\ndplyr and tidyverse: a lot of functions, each with a very specific purpose\nbase R: several core functions and features, supporting very specific uses via function arguments or by combining things together"
+  },
+  {
+    "objectID": "session_2/session_2.html#base-r-versus-dplyr-4",
+    "href": "session_2/session_2.html#base-r-versus-dplyr-4",
+    "title": "Session 2: dplyr",
+    "section": "base R versus dplyr",
+    "text": "base R versus dplyr\n\nfor example to merge data:\n\ndplyr: left_join(), right_join(), inner_join(), full_join()\nbase R: merge() with the by.x and by.y arguments\n\nnotice that the difference in the number of functions is a factor of 4!"
   },
   {
     "objectID": "index.html",
@@ -396,7 +410,7 @@
     "href": "session_1/session_1.html#example-a-data-snippet-2",
     "title": "Session 1: Piping",
     "section": "Example: a data snippet",
-    "text": "Example: a data snippet\n\nI can split the subset() call into two calls to make it even easier to read:\n\n\nnhanes |&gt;\n  subset(smoking == 'History of smoking') |&gt;\n  subset(select = c('hypertension', 'smoking')) |&gt;\n  head()"
+    "text": "Example: a data snippet\n\nI can split the subset() call into two calls to make it even easier to read:\n\n\nnhanes |&gt;\n  subset(smoking == 'History of smoking') |&gt;\n  subset(select = c(hypertension, smoking)) |&gt;\n  head()"
   },
   {
     "objectID": "session_1/session_1.html#in-summary",
@@ -410,7 +424,7 @@
     "href": "session_1/session_1.html#what-does-this-have-to-do-with-data-wrangling",
     "title": "Session 1: Piping",
     "section": "What does this have to do with data wrangling?",
-    "text": "What does this have to do with data wrangling?\n\ngreat question!\npiping can definitely be used for data analysis\nso, piping is not inherently for data wrangling\nbut, using piping for data wrangling can be very useful, as with this earlier example:\n\n\nnhanes |&gt;\n  subset(smoking == 'History of smoking') |&gt;\n  subset(select = c('hypertension', 'smoking')) |&gt;\n  head()"
+    "text": "What does this have to do with data wrangling?\n\ngreat question!\npiping can definitely be used for data analysis\nso, piping is not inherently for data wrangling\nbut, using piping for data wrangling can be very useful, as with this earlier example:\n\n\nnhanes |&gt;\n  subset(smoking == 'History of smoking') |&gt;\n  subset(select = c(hypertension, smoking)) |&gt;\n  head()"
   },
   {
     "objectID": "session_1/session_1.html#havent-i-seen-something-like-this-somewhere-else",

@@ -6,8 +6,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.19">
 
   <meta name="author" content="Yea-Hung Chen, PhD, MS">
   <title>Data Wrangling in R – Session 2: dplyr</title>
@@ -369,20 +369,20 @@ Yea-Hung Chen, PhD, MS
 <span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#| [1] "data.frame"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="why-should-i-not-use-dplyr" class="slide level2">
-<h2>Why should I not use <code>dplyr</code>?</h2>
-<ul>
-<li>my opinion: <code>dplyr</code> and tidyverse are <strong>bloated</strong>, with a lot of functions overall, including functions that reproduce base-R functions or features</li>
-<li>my opinion: the tidyverse approach is <strong>too strict</strong></li>
-<li>my opinion: the introduction of piping to base R makes <code>dplyr</code> and tidyverse feel even more <strong>redundant</strong></li>
-</ul>
-</section>
 <section id="why-should-i-use-dplyr" class="slide level2">
 <h2>Why should I use <code>dplyr</code>?</h2>
 <ul>
 <li><code>dplyr</code> and the tidyverse are <strong>enormously popular</strong></li>
 <li><code>dplyr</code> also includes functions and approaches that people argue to be <strong>easier to understand</strong> or easier to read than base-R equivalents</li>
 <li>in some cases, <code>dplyr</code> or tidyverse functions can be <strong>faster</strong> than base-R equivalents</li>
+</ul>
+</section>
+<section id="why-should-i-not-use-dplyr" class="slide level2">
+<h2>Why should I not use <code>dplyr</code>?</h2>
+<ul>
+<li>my opinion: <code>dplyr</code> and tidyverse are <strong>bloated</strong>, with a lot of functions overall, including functions that reproduce base-R functions or features</li>
+<li>my opinion: the tidyverse approach is <strong>too strict</strong></li>
+<li>my opinion: the introduction of piping to base R makes <code>dplyr</code> and tidyverse feel even more <strong>redundant</strong></li>
 </ul>
 </section>
 <section id="why-should-i-learn-dplyr" class="slide level2">
@@ -756,12 +756,12 @@ Yea-Hung Chen, PhD, MS
 </ol>
 </section></section>
 <section>
-<section id="should-i-use-dplyr-and-tidyverse" class="title-slide slide level1 center" data-stack-name="Strategy">
-<h1>Should I use <code>dplyr</code> and tidyverse?</h1>
+<section id="base-r-versus-dplyr" class="title-slide slide level1 center" data-stack-name="A comparison">
+<h1>Base R versus <code>dplyr</code></h1>
 
 </section>
-<section id="comparison" class="slide level2">
-<h2>Comparison</h2>
+<section id="base-r-versus-dplyr-1" class="slide level2">
+<h2>base R versus <code>dplyr</code></h2>
 <ul>
 <li>a summary of key <code>dplyr</code> functions and their base-R equivalents:</li>
 </ul>
@@ -792,18 +792,18 @@ Yea-Hung Chen, PhD, MS
 </tbody>
 </table>
 </section>
-<section id="comparison-1" class="slide level2">
-<h2>Comparison</h2>
+<section id="base-r-versus-dplyr-2" class="slide level2">
+<h2>base R versus <code>dplyr</code></h2>
 <ul>
 <li>many key functions in <code>dplyr</code> reproduce base-R functions</li>
 <li>that being said, the <strong><code>dplyr</code> equivalents may be faster or offer other improvements</strong></li>
 <li><code>dplyr</code> and tidyverse overall also offer <strong>numerous other functions</strong> that some find useful or convenient</li>
 </ul>
 </section>
-<section id="comparison-2" class="slide level2">
-<h2>Comparison</h2>
+<section id="other-dplyr-functions" class="slide level2">
+<h2>Other <code>dplyr</code> functions</h2>
 <ul>
-<li>for example, <strong><code>starts_with()</code></strong> can be used in <code>select()</code> to pick variables beginning with a pattern:</li>
+<li>for example, we can <code>dplyr</code>’s <strong><code>starts_with()</code></strong> to pick variables beginning with a pattern:</li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">'bpxosy'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -818,10 +818,46 @@ Yea-Hung Chen, PhD, MS
 <li>this uses <strong><code>grep()</code></strong>, a powerful base-R function for searching for text strings</li>
 </ul>
 </section>
-<section id="should-i-use-dplyr-and-tidyverse-1" class="slide level2">
-<h2>Should I use <code>dplyr</code> and tidyverse?</h2>
+<section id="other-dplyr-functions-1" class="slide level2">
+<h2>Other <code>dplyr</code> functions</h2>
 <ul>
-<li><strong>it’s up to you</strong>!</li>
+<li>or, for example, to make all the variable names lowercase, we could use <code>dplyr</code>’s <strong><code>rename_with()</code></strong>:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span> <span class="fu">rename_with</span>(tolower)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>a base-R approach would be:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span> <span class="fu">setNames</span>(<span class="fu">tolower</span>(<span class="fu">names</span>(nhanes)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>or:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(nhanes) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">names</span>(nhanes))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="base-r-versus-dplyr-3" class="slide level2">
+<h2>base R versus <code>dplyr</code></h2>
+<ul>
+<li>an overall <strong>philosophical difference</strong> is:
+<ul>
+<li><code>dplyr</code> and tidyverse: a lot of functions, each with a very specific purpose</li>
+<li>base R: several core functions and features, supporting very specific uses via function arguments or by combining things together</li>
+</ul></li>
+</ul>
+</section>
+<section id="base-r-versus-dplyr-4" class="slide level2">
+<h2>base R versus <code>dplyr</code></h2>
+<ul>
+<li>for example to <strong>merge data</strong>:
+<ul>
+<li><code>dplyr</code>: <code>left_join()</code>, <code>right_join()</code>, <code>inner_join()</code>, <code>full_join()</code></li>
+<li>base R: <code>merge()</code> with the <code>by.x</code> and <code>by.y</code> arguments</li>
+</ul></li>
+<li>notice that the difference in the number of functions is a factor of 4!</li>
 </ul>
 
 

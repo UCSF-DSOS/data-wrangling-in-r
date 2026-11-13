@@ -6,8 +6,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.19">
 
   <meta name="author" content="Yea-Hung Chen, PhD, MS">
   <title>Data Wrangling in R – Session 1: Piping</title>
@@ -379,7 +379,7 @@ Yea-Hung Chen, PhD, MS
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(smoking <span class="sc">==</span> <span class="st">'History of smoking'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(<span class="st">'hypertension'</span>, <span class="st">'smoking'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(hypertension, smoking)) <span class="sc">|&gt;</span></span>
 <span id="cb11-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -402,7 +402,7 @@ Yea-Hung Chen, PhD, MS
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(smoking <span class="sc">==</span> <span class="st">'History of smoking'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(<span class="st">'hypertension'</span>, <span class="st">'smoking'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(hypertension, smoking)) <span class="sc">|&gt;</span></span>
 <span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
