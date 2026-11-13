@@ -761,7 +761,7 @@ Yea-Hung Chen, PhD, MS
 
 </section>
 <section id="base-r-versus-dplyr-1" class="slide level2">
-<h2>base R versus <code>dplyr</code></h2>
+<h2>Base R versus <code>dplyr</code></h2>
 <ul>
 <li>a summary of key <code>dplyr</code> functions and their base-R equivalents:</li>
 </ul>
@@ -793,7 +793,7 @@ Yea-Hung Chen, PhD, MS
 </table>
 </section>
 <section id="base-r-versus-dplyr-2" class="slide level2">
-<h2>base R versus <code>dplyr</code></h2>
+<h2>Base R versus <code>dplyr</code></h2>
 <ul>
 <li>many key functions in <code>dplyr</code> reproduce base-R functions</li>
 <li>that being said, the <strong><code>dplyr</code> equivalents may be faster or offer other improvements</strong></li>
@@ -803,7 +803,7 @@ Yea-Hung Chen, PhD, MS
 <section id="other-dplyr-functions" class="slide level2">
 <h2>Other <code>dplyr</code> functions</h2>
 <ul>
-<li>for example, we can <code>dplyr</code>’s <strong><code>starts_with()</code></strong> to pick variables beginning with a pattern:</li>
+<li>for example, we can use <code>dplyr</code>’s <strong><code>starts_with()</code></strong> to pick variables beginning with a pattern:</li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a>nhanes <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">'bpxosy'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -839,8 +839,8 @@ Yea-Hung Chen, PhD, MS
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(nhanes) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">names</span>(nhanes))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="base-r-versus-dplyr-3" class="slide level2">
-<h2>base R versus <code>dplyr</code></h2>
+<section id="base-r-versus-tidyverse" class="slide level2">
+<h2>Base R versus tidyverse</h2>
 <ul>
 <li>an overall <strong>philosophical difference</strong> is:
 <ul>
@@ -849,8 +849,8 @@ Yea-Hung Chen, PhD, MS
 </ul></li>
 </ul>
 </section>
-<section id="base-r-versus-dplyr-4" class="slide level2">
-<h2>base R versus <code>dplyr</code></h2>
+<section id="base-r-versus-tidyverse-1" class="slide level2">
+<h2>Base R versus tidyverse</h2>
 <ul>
 <li>for example to <strong>merge data</strong>:
 <ul>
@@ -858,6 +858,20 @@ Yea-Hung Chen, PhD, MS
 <li>base R: <code>merge()</code> with the <code>by.x</code> and <code>by.y</code> arguments</li>
 </ul></li>
 <li>notice that the difference in the number of functions is a factor of 4!</li>
+</ul>
+</section>
+<section id="baseverse" class="slide level2">
+<h2><code>baseverse</code></h2>
+<ul>
+<li>I wrote <code>baseverse</code> to try to accommodate some of what makes the tidyverse useful, while trying to avoid bloat</li>
+<li>and, as I mentioned in <a href="https://ucsf-dsos.github.io/a-slower-introduction-to-r/"><em>A Slower Introduction to R</em></a>, I wrote <code>base_match()</code> and <code>base_when()</code> to specifically address what I view to be weaknesses in <code>case_match()</code> and <code>case_when()</code></li>
+</ul>
+</section>
+<section id="options" class="slide level2">
+<h2>Options!</h2>
+<ul>
+<li>overall, I want to show you options</li>
+<li>I hope that those options don’t overwhelm you</li>
 </ul>
 
 

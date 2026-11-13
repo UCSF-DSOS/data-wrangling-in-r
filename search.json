@@ -255,22 +255,22 @@
     "objectID": "session_2/session_2.html#base-r-versus-dplyr-1",
     "href": "session_2/session_2.html#base-r-versus-dplyr-1",
     "title": "Session 2: dplyr",
-    "section": "base R versus dplyr",
-    "text": "base R versus dplyr\n\na summary of key dplyr functions and their base-R equivalents:\n\n\n\n\nbase R\nbaseverse\ndplyr\n\n\n\n\nsubset()\n\nfilter()\n\n\nsubset(select=)\nkeep()\nselect()\n\n\ntransform()\n\nmutate()"
+    "section": "Base R versus dplyr",
+    "text": "Base R versus dplyr\n\na summary of key dplyr functions and their base-R equivalents:\n\n\n\n\nbase R\nbaseverse\ndplyr\n\n\n\n\nsubset()\n\nfilter()\n\n\nsubset(select=)\nkeep()\nselect()\n\n\ntransform()\n\nmutate()"
   },
   {
     "objectID": "session_2/session_2.html#base-r-versus-dplyr-2",
     "href": "session_2/session_2.html#base-r-versus-dplyr-2",
     "title": "Session 2: dplyr",
-    "section": "base R versus dplyr",
-    "text": "base R versus dplyr\n\nmany key functions in dplyr reproduce base-R functions\nthat being said, the dplyr equivalents may be faster or offer other improvements\ndplyr and tidyverse overall also offer numerous other functions that some find useful or convenient"
+    "section": "Base R versus dplyr",
+    "text": "Base R versus dplyr\n\nmany key functions in dplyr reproduce base-R functions\nthat being said, the dplyr equivalents may be faster or offer other improvements\ndplyr and tidyverse overall also offer numerous other functions that some find useful or convenient"
   },
   {
     "objectID": "session_2/session_2.html#other-dplyr-functions",
     "href": "session_2/session_2.html#other-dplyr-functions",
     "title": "Session 2: dplyr",
     "section": "Other dplyr functions",
-    "text": "Other dplyr functions\n\nfor example, we can dplyr’s starts_with() to pick variables beginning with a pattern:\n\n\nnhanes |&gt; select(starts_with('bpxosy'))\n\n\na base-R approach would be:\n\n\nnhanes |&gt; subset(select=grep('^bpxosy',names(nhanes)))\n\n\nthis uses grep(), a powerful base-R function for searching for text strings"
+    "text": "Other dplyr functions\n\nfor example, we can use dplyr’s starts_with() to pick variables beginning with a pattern:\n\n\nnhanes |&gt; select(starts_with('bpxosy'))\n\n\na base-R approach would be:\n\n\nnhanes |&gt; subset(select=grep('^bpxosy',names(nhanes)))\n\n\nthis uses grep(), a powerful base-R function for searching for text strings"
   },
   {
     "objectID": "session_2/session_2.html#other-dplyr-functions-1",
@@ -280,18 +280,32 @@
     "text": "Other dplyr functions\n\nor, for example, to make all the variable names lowercase, we could use dplyr’s rename_with():\n\n\nnhanes |&gt; rename_with(tolower)\n\n\na base-R approach would be:\n\n\nnhanes |&gt; setNames(tolower(names(nhanes)))\n\n\nor:\n\n\nnames(nhanes) &lt;- tolower(names(nhanes))"
   },
   {
-    "objectID": "session_2/session_2.html#base-r-versus-dplyr-3",
-    "href": "session_2/session_2.html#base-r-versus-dplyr-3",
+    "objectID": "session_2/session_2.html#base-r-versus-tidyverse",
+    "href": "session_2/session_2.html#base-r-versus-tidyverse",
     "title": "Session 2: dplyr",
-    "section": "base R versus dplyr",
-    "text": "base R versus dplyr\n\nan overall philosophical difference is:\n\ndplyr and tidyverse: a lot of functions, each with a very specific purpose\nbase R: several core functions and features, supporting very specific uses via function arguments or by combining things together"
+    "section": "Base R versus tidyverse",
+    "text": "Base R versus tidyverse\n\nan overall philosophical difference is:\n\ndplyr and tidyverse: a lot of functions, each with a very specific purpose\nbase R: several core functions and features, supporting very specific uses via function arguments or by combining things together"
   },
   {
-    "objectID": "session_2/session_2.html#base-r-versus-dplyr-4",
-    "href": "session_2/session_2.html#base-r-versus-dplyr-4",
+    "objectID": "session_2/session_2.html#base-r-versus-tidyverse-1",
+    "href": "session_2/session_2.html#base-r-versus-tidyverse-1",
     "title": "Session 2: dplyr",
-    "section": "base R versus dplyr",
-    "text": "base R versus dplyr\n\nfor example to merge data:\n\ndplyr: left_join(), right_join(), inner_join(), full_join()\nbase R: merge() with the by.x and by.y arguments\n\nnotice that the difference in the number of functions is a factor of 4!"
+    "section": "Base R versus tidyverse",
+    "text": "Base R versus tidyverse\n\nfor example to merge data:\n\ndplyr: left_join(), right_join(), inner_join(), full_join()\nbase R: merge() with the by.x and by.y arguments\n\nnotice that the difference in the number of functions is a factor of 4!"
+  },
+  {
+    "objectID": "session_2/session_2.html#baseverse",
+    "href": "session_2/session_2.html#baseverse",
+    "title": "Session 2: dplyr",
+    "section": "baseverse",
+    "text": "baseverse\n\nI wrote baseverse to try to accommodate some of what makes the tidyverse useful, while trying to avoid bloat\nand, as I mentioned in A Slower Introduction to R, I wrote base_match() and base_when() to specifically address what I view to be weaknesses in case_match() and case_when()"
+  },
+  {
+    "objectID": "session_2/session_2.html#options",
+    "href": "session_2/session_2.html#options",
+    "title": "Session 2: dplyr",
+    "section": "Options!",
+    "text": "Options!\n\noverall, I want to show you options\nI hope that those options don’t overwhelm you"
   },
   {
     "objectID": "index.html",
